@@ -1,4 +1,13 @@
-<p>
-  home works!
-
-</p>
+<div class="col-md-10 col-md-offset-1">
+    <div class="row text-center">
+        <h2>WWE 2k18 Universe Mode Companion App</h2>
+    </div>
+    <div class="row">
+        <app-card [value]="'Shows'" (menuSelection)="doNavigate()"></app-card>
+        <app-card [value]="'Roster'" (menuSelection)="doNavigate()">></app-card>
+    </div>
+    <div class="row">
+        <app-card [value]="'Championships'" (menuSelection)="doNavigate()">></app-card>
+        <app-card [value]="'Draft Mode'" (menuSelection)="doNavigate()">></app-card>
+    </div>
+</div>

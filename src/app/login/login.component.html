@@ -3,13 +3,14 @@
         <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" placeholder="Email">
+                <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email">
                 <div *ngIf="loginForm.controls['email'].hasError('required') && loginForm.controls['email'].touched" class="alert alert-danger">Required</div>
             </div>
 
             <div class="form-group">
                 <label for="password">Password:</label>
-                <input type="password" class="form-control" id="password">
+                <input type="password" class="form-control" id="password" formControlName="password">
+                <div *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched" class="alert alert-danger">Required</div>
             </div>
             <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid">Login</button>
         </form>

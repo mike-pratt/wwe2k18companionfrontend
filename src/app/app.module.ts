@@ -11,12 +11,14 @@ import {AuthGuard} from './shared/guards/auth.guard';
 import {PersistenceService} from './shared/services/system/persistence.service';
 import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {SharedModule} from './shared/shared.module';
+import {ComponentsModule} from './shared/components/components.module';
 
     @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
-        LoginComponent
+        LoginComponent,
     ],
     imports: [
         BrowserModule,
@@ -24,7 +26,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         FormsModule,
         ReactiveFormsModule,
         RouterModule.forRoot(ROUTES),
-        AlertModule.forRoot()
+        AlertModule.forRoot(),
+        SharedModule,
+        ComponentsModule
     ],
     providers: [AuthGuard,
                 AuthService,

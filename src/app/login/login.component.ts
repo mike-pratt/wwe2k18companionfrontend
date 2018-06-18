@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
           password: this.loginForm.value.password
       };
       console.log(loginDTO);
-      // this.servicePostLogin(loginDTO);
+      this.servicePostLogin(loginDTO);
   }
 
   private servicePostLogin(loginDTO: LoginDTO): Subscription {
