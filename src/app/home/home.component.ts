@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,13 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
-  doNavigate(): void {
-    console.log('ffff');
+  doNavigate(navigationOption: number): void {
+    switch (navigationOption) {
+        case 0: // Shows
+            this.router.navigate(['/shows']);
+            break;
+        case 1: // Roster
+            this.router.navigate(['/roster']);
+            break;
+        case 2: // Championships
+            this.router.navigate(['/championships']);
+            break;
+        case 3: // Draft Mode
+            // this.router.navigate(['/draft']); // TODO
+            break;
+        default:
+          break;
+    }
   }
 
 }

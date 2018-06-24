@@ -13,12 +13,24 @@ import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from './shared/shared.module';
 import {ComponentsModule} from './shared/components/components.module';
+import { ShowsListComponent } from './shows/shows-list/shows-list.component';
+import { RosterListComponent } from './roster/roster-list/roster-list.component';
+import { RosterViewComponent } from './roster/roster-view/roster-view.component';
+import { ChampionshipListComponent } from './championships/championship-list/championship-list.component';
+import { ChampionshipViewComponent } from './championships/championship-view/championship-view.component';
+import { ShowsViewComponent } from './shows/shows-view/shows-view.component';
 
     @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
         LoginComponent,
+        ShowsListComponent,
+        RosterListComponent,
+        RosterViewComponent,
+        ChampionshipListComponent,
+        ChampionshipViewComponent,
+        ShowsViewComponent,
     ],
     imports: [
         BrowserModule,
