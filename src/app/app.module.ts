@@ -19,6 +19,8 @@ import { RosterViewComponent } from './roster/roster-view/roster-view.component'
 import { ChampionshipListComponent } from './championships/championship-list/championship-list.component';
 import { ChampionshipViewComponent } from './championships/championship-view/championship-view.component';
 import { ShowsViewComponent } from './shows/shows-view/shows-view.component';
+import {NgxDatatableModule} from '@swimlane/ngx-datatable';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
 
     @NgModule({
     declarations: [
@@ -40,7 +42,9 @@ import { ShowsViewComponent } from './shows/shows-view/shows-view.component';
         RouterModule.forRoot(ROUTES),
         AlertModule.forRoot(),
         SharedModule,
-        ComponentsModule
+        ComponentsModule,
+        NgxDatatableModule,
+        AngularFontAwesomeModule
     ],
     providers: [AuthGuard,
                 AuthService,

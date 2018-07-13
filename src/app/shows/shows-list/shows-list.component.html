@@ -1,3 +1,19 @@
-<p>
-  shows-list works!
-</p>
+<div class="col-md-10">
+  <div class="row">
+    <button class="btn btn-primary">Add Show</button>
+  </div>
+  <div class="row content-row">
+    <ngx-datatable
+            class="bootstrap"
+            [selectionType]="single"
+            [rows]="rows"
+            [columns]="columns"
+            [count]="15"
+            [offset]="0"
+            [limit]="15"
+            (page)="goToPage($event)"
+            (select)="selectShow($event)"
+    >
+    </ngx-datatable>
+  </div>
+</div>
