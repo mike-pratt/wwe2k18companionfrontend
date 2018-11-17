@@ -12,12 +12,12 @@ import {Show} from '../../shared/models/shows/show.model';
 export class ShowsListComponent implements OnInit {
 
     rows = [
-        { name: 'Raw' },
-        { name: 'Smackdown' },
-        { name: 'NXT' },
+        // { name: 'Raw' },
+        // { name: 'Smackdown' },
+        // { name: 'NXT' },
     ];
     columns = [
-        { prop: 'name' },
+        { prop: 'Show Name' },
     ];
 
     private shows: Paged<Show>;
@@ -41,6 +41,9 @@ export class ShowsListComponent implements OnInit {
       return this._showService.getShows(page).subscribe((data) => {
           this.shows = data;
           console.log(data);
+          for (let i = 0; i < data.data.length; i++) {
+              this.rows.push( { name: data.data[i].name }); // FIXME This is not workling.
+          }
       });
   }
 
