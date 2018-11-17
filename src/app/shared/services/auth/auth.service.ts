@@ -5,7 +5,6 @@ import {Observable} from 'rxjs/Observable';
 import {Subscriber} from 'rxjs/Subscriber';
 import {AuthToken} from '../../models/auth/token.model';
 import {AuthUser} from '../../models/auth/user.model';
-import {User} from '../../models/users/user.model';
 import {PersistenceService} from '../system/persistence.service';
 import {Injectable} from '@angular/core';
 
@@ -16,13 +15,15 @@ export class AuthService extends BaseService {
         const authTokenData = localStorage.getItem(CONFIGURATION.authTokenName);
 
         if (!authTokenData) {
-            return undefined;
+            return null;
         }
 
         const authToken: AuthToken = JSON.parse(authTokenData);
 
+        console.log('auth token : ', authToken);
+
         if (!authToken) {
-            return undefined;
+            return null;
         }
         return authToken;
     }
@@ -60,11 +61,10 @@ export class AuthService extends BaseService {
                         email: loginEmail,
                         password: loginPassword
                     }),
-                    this.getRequestOptions())
+                    this.getRequestOptions(false))
                 .map((res) => res.json())
                 .subscribe((token: AuthToken) => {
                     AuthService.setToken(token.token);
-
                     this._http
                         .get(this.actionUrl + '/current',
                             this.getRequestOptions())
@@ -74,7 +74,10 @@ export class AuthService extends BaseService {
                             subsriber.next(this._persistence.authUser.getValue());
                             subsriber.complete();
                         }, (error) => subsriber.error(error));
-                }, (error) => subsriber.error(error));
+                }, (error) => {
+                    console.log('error occurred when subscribing auth token.', error);
+                    subsriber.error(error);
+                });
         });
     }
 
@@ -99,10 +102,4 @@ export class AuthService extends BaseService {
                 }, () => subsriber.error());
         });
     }
-
-    public getCurrent(): Observable<User> {
-        return this._http.get(this.actionUrl + '/current', this.getRequestOptions())
-            .map((res) => res.json());
-    }
-
 }

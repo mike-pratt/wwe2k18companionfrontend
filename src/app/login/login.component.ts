@@ -4,6 +4,7 @@ import {AuthService} from '../shared/services/auth/auth.service';
 import {LoginDTO} from '../shared/models/loginDTO.model';
 import {Subscription} from 'rxjs/Subscription';
 import {AuthUser} from '../shared/models/auth/user.model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   private authUser: AuthUser;
 
   constructor(public fb: FormBuilder,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private router: Router) {
       this.loginForm = fb.group({
           email: [null, Validators.compose([Validators.required])],
           password: [null, Validators.compose([Validators.required])]
@@ -38,8 +40,14 @@ export class LoginComponent implements OnInit {
 
   private servicePostLogin(loginDTO: LoginDTO): Subscription {
       return this.authService.postLogin(loginDTO.email, loginDTO.password).subscribe((authUser) => {
+          console.log('successful login');
           this.authUser = authUser;
-          console.log(this.authUser);
+          console.log('success ', this.authUser);
+          this.router.navigate(['/']);
+      }, (error) => {
+          console.log('error ', error);
+      }, () => {
+          console.log('Someting else has happened');
       });
   }
 

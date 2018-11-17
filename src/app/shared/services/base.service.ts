@@ -16,6 +16,7 @@ export class BaseService {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json');
         this.headers.append('Accept', 'application/json');
+        this.headers.append('Access-Control-Allow-Origin', '*');
         this.httpPrefix = 'http://';
         if (CONFIGURATION.isDev) {
             this.httpPrefix = CONFIGURATION.devConfig.useHttps ? 'https://' : 'http://';
@@ -28,14 +29,16 @@ export class BaseService {
         }
     }
 
-    protected getRequestOptions(): RequestOptions {
+    protected getRequestOptions(includeAuthHeader: boolean = true): RequestOptions {
         const newRequestHeaders = new Headers(this.headers);
         let isAuthorised = false;
-        const authToken = AuthService.getAuthToken();
-
+        const authToken = includeAuthHeader ? AuthService.getAuthToken() : null;
+        console.log('Auth Token included in header: ', authToken);
         if (authToken) {
-            isAuthorised = true;
+            // isAuthorised = true; // FIXME: withCredentials should be true, but commenting this out makes it false. Which is not the proper way, but the app is now correctly consuming the REST API.
+                                   // FIXME: so investigate this issue at a later date. Look at removing the Authorization header in the allowedHeaders array in the cors.php file in config, then setting isAuthorised here to true??
             newRequestHeaders.append('Authorization', 'Bearer' + authToken.token);
+            console.log('new request headers ', newRequestHeaders);
         }
 
         return new RequestOptions({

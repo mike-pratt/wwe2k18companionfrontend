@@ -12,15 +12,14 @@ import {ChampionshipViewComponent} from './championships/championship-view/champ
 
 export const ROUTES: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent }, // , canActivate: [AuthGuard] },
-    { path: 'shows', component: ShowsListComponent },
-    { path: 'shows/{id}', component: ShowsViewComponent },
-    { path: 'roster', component: RosterListComponent },
-    { path: 'roster/{id}', component: RosterViewComponent }, // 'wrestler/{id} instead?
-    { path: 'championships', component: ChampionshipListComponent },
-    { path: 'championships/{id}', component: ChampionshipViewComponent },
-
-    // { path: 'auth/login', component: LoginComponent },
+    { path: 'auth/login', component: LoginComponent },
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'shows', component: ShowsListComponent, canActivate: [AuthGuard] },
+    { path: 'shows/{id}', component: ShowsViewComponent, canActivate: [AuthGuard] },
+    { path: 'roster', component: RosterListComponent, canActivate: [AuthGuard] },
+    { path: 'roster/{id}', component: RosterViewComponent, canActivate: [AuthGuard] }, // 'wrestler/{id} instead?
+    { path: 'championships', component: ChampionshipListComponent, canActivate: [AuthGuard] },
+    { path: 'championships/{id}', component: ChampionshipViewComponent, canActivate: [AuthGuard] },
 
     // { path: 'auth/logout', component: LogoutComponent, canActivate: [AuthGuard] },
     // { path: 'auth/changepassword', component: AuthChangePasswordComponent, canActivate: [AuthGuard] }, // Temp, remove

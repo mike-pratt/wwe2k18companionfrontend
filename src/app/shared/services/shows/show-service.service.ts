@@ -10,7 +10,7 @@ export class ShowServiceService extends BaseService { // TODO: Rename ShowServic
 
   constructor(_http: Http) {
     super(_http);
-    this.actionUrl += 'v0/shows';
+    this.actionUrl += 'v0/show';
   }
 
   public getShows(pageNumber: number): Observable<Paged<Show>> {

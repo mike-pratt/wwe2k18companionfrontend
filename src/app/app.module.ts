@@ -21,6 +21,7 @@ import { ChampionshipViewComponent } from './championships/championship-view/cha
 import { ShowsViewComponent } from './shows/shows-view/shows-view.component';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
+import {ShowServiceService} from './shared/services/shows/show-service.service';
 
     @NgModule({
     declarations: [
@@ -48,7 +49,8 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
     ],
     providers: [AuthGuard,
                 AuthService,
-                PersistenceService],
+                PersistenceService,
+                ShowServiceService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

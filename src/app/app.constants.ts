@@ -1,7 +1,7 @@
 
 export let CONFIGURATION = {
     devConfig: {
-        server: 'homestead.test',
+        server: 'wwe2kcompanionapi.test',
         apiUrl: '/api/',
         useHttps: false
     },
