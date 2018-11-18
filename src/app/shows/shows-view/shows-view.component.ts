@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { ShowServiceService } from '../../shared/services/shows/show-service.service';
 import { Show } from '../../shared/models/shows/show.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { YesNoDialogModalComponent } from '../../shared/components/yesnodialogmodal/yesnodialogmodal.component';
 
 @Component({
   selector: 'app-shows-view',
@@ -12,7 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ShowsViewComponent implements OnInit {
 
-    @ViewChild('confirmDeleteDialogModal') public confirmDeleteDialogModal: YesNoDialogModalComponent;
+    @ViewChild('confirmDeleteDialogModal') public confirmDeleteDialogModal: YesNoDialogModalComponent; // TODO: Finish this. iMac keeps running out of RAM 18/11/18
     public showForm: FormGroup;
     public editButtonPressed: boolean;
     public show: Show;
