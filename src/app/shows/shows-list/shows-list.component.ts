@@ -39,7 +39,6 @@ export class ShowsListComponent implements OnInit {
   private serviceGetShows(page: number): Subscription {
       return this._showService.getShows(page).subscribe((data: Paged<Show>) => {
           this.shows = data;
-          console.log(this.shows);
       });
   }
 

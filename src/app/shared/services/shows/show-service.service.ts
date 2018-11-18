@@ -14,10 +14,17 @@ export class ShowServiceService extends BaseService { // TODO: Rename ShowServic
   }
 
   public getShows(pageNumber: number): Observable<Paged<Show>> {
-    return this._http.get(this.actionUrl + '?page=' + pageNumber, this.getRequestOptions())
-        .map((data) => {
-          return data.json();
-        });
+      return this._http.get(this.actionUrl + '?page=' + pageNumber, this.getRequestOptions())
+          .map((data) => {
+            return data.json();
+          });
+  }
+
+  public getById(id: number): Observable<Show> {
+      return this._http.get(this.actionUrl + '/' + id, this.getRequestOptions())
+          .map((data) => {
+                return data.json();
+          });
   }
 
 }
