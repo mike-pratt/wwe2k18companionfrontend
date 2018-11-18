@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Http} from '@angular/http';
+import { Http, Response } from '@angular/http';
 import {BaseService} from '../base.service';
 import {Observable} from 'rxjs/Observable';
 import {Paged} from '../../models/paged.model';
@@ -20,11 +20,23 @@ export class ShowServiceService extends BaseService { // TODO: Rename ShowServic
           });
   }
 
-  public getById(id: number): Observable<Show> {
+  public getShowById(id: number): Observable<Show> {
       return this._http.get(this.actionUrl + '/' + id, this.getRequestOptions())
           .map((data) => {
                 return data.json();
           });
+  }
+
+  public updateShow(show: Show): Observable<Response> {
+      return this._http.put(this.actionUrl + '/' + show.id, JSON.stringify(show), this.getRequestOptions());
+  }
+
+  public createShow(show: Show): Observable<Response> {
+      return this._http.post(this.actionUrl, JSON.stringify(show), this.getRequestOptions());
+  }
+
+  public deleteShow(id: number): Observable<Response> {
+      return this._http.delete(this.actionUrl + '/' + id, this.getRequestOptions());
   }
 
 }

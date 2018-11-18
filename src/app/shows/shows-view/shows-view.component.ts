@@ -45,12 +45,15 @@ export class ShowsViewComponent implements OnInit {
 
     public saveShow(): void {
         this.editButtonPressed = false;
-        // let show = this.showForm
+        this.show.name = this.showForm.value.name;
+        this.show.primary_display = this.showForm.value.primary_display;
+
+        this.serviceUpdateShow(this.show);
     }
 
     public cancelEditShow(): void {
       this.editButtonPressed = false;
-      // this.showForm.reset();
+      this.showData();
     }
 
     private showData(): void {
@@ -61,11 +64,19 @@ export class ShowsViewComponent implements OnInit {
     }
 
     private serviceGetShow(showId: number): Subscription {
-        return this._showService.getById(showId).subscribe((data) => {
+        return this._showService.getShowById(showId).subscribe((data) => {
             this.show = data;
             console.log(this.show);
             this.showData();
         });
+    }
+
+    private serviceUpdateShow(show: Show): Subscription {
+        return this._showService.updateShow(show).subscribe();
+    }
+
+    private serviceDeleteShow(id: number): Subscription {
+        return this._showService.deleteShow(id).subscribe();
     }
 
 }
