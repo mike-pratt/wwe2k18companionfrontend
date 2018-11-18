@@ -1,24 +1,30 @@
-<div class="col-md-10">
-  <div class="row">
-    <button class="btn btn-primary">Add Show</button>
-  </div>
-  <div class="row content-row" *ngIf="shows">
-    <ngx-datatable
-            class="bootstrap"
-            [selectionType]="'single'"
-            [rows]="shows.data"
-            [columns]="columns"
-            [count]="shows.total"
-            [columnMode]="'force'"
-            [headerHeight]="'auto'"
-            [footerHeight]="'auto'"
-            [rowHeight]="'auto'"
-            [externalPaging]="true"
-            [offset]="pageOffset"
-            [limit]="shows.per_page"
-            (page)="goToPage($event)"
-            (select)="goToView($event)"
-    >
-    </ngx-datatable>
-  </div>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary">Add Show</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <ngx-datatable
+                        class="bootstrap"
+                        [selectionType]="'single'"
+                        [rows]="shows.data"
+                        [columns]="columns"
+                        [count]="shows.total"
+                        [columnMode]="'force'"
+                        [headerHeight]="'auto'"
+                        [footerHeight]="'auto'"
+                        [rowHeight]="'auto'"
+                        [externalPaging]="true"
+                        [offset]="pageOffset"
+                        [limit]="shows.per_page"
+                        (page)="goToPage($event)"
+                        (select)="goToView($event)"
+                >
+                </ngx-datatable>
+            </div>
+        </div>
+    </div>
 </div>
