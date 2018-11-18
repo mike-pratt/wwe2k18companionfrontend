@@ -56,6 +56,11 @@ export class ShowsViewComponent implements OnInit {
       this.showData();
     }
 
+    public deleteShow(): void {
+        // TODO: add shared yes no modal to confirm deletion.
+        this.serviceDeleteShow(this.show.id);
+    }
+
     private showData(): void {
         this.showForm.setValue({
             name: this.show.name,

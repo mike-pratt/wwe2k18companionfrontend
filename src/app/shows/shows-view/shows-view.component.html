@@ -5,6 +5,7 @@
             <button class="btn btn-primary" (click)="saveShow()" [disabled]="!showForm.valid">Save</button>
             <button class="btn btn-default" (click)="cancelEditShow()">Cancel</button>
         </div>
+        <button class="btn btn-danger" (click)="deleteShow()">Delete</button>
     </div>
     <div class="col-md-10 col-md-offset-1">
         <form [formGroup]="showForm">
