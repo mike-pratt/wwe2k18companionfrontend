@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ShowsViewComponent implements OnInit {
 
+    @ViewChild('confirmDeleteDialogModal') public confirmDeleteDialogModal: YesNoDialogModalComponent;
     public showForm: FormGroup;
     public editButtonPressed: boolean;
     public show: Show;
