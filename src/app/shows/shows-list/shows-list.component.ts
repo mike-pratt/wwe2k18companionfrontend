@@ -3,6 +3,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {ShowServiceService} from '../../shared/services/shows/show-service.service';
 import {Paged} from '../../shared/models/paged.model';
 import {Show} from '../../shared/models/shows/show.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shows-list',
@@ -11,39 +12,34 @@ import {Show} from '../../shared/models/shows/show.model';
 })
 export class ShowsListComponent implements OnInit {
 
-    rows = [
-        // { name: 'Raw' },
-        // { name: 'Smackdown' },
-        // { name: 'NXT' },
-    ];
-    columns = [
-        { prop: 'Show Name' },
+    public pageOffset = 0;
+    public columns = [
+        { name: 'Show Name', prop: 'name' },
     ];
 
-    private shows: Paged<Show>;
+    public shows: Paged<Show>;
 
-  constructor(private _showService: ShowServiceService) {
-      this.serviceGetShows(0);
+  constructor(private _showService: ShowServiceService,
+              private _router: Router) {
   }
 
   ngOnInit() {
+      this.serviceGetShows(0);
   }
 
   public goToPage(event): void {
 
   }
 
-  public selectShow(event): void {
-
+  public goToView(event: any): void {
+      const show = event.selected[0];
+      this._router.navigate(['shows', show.id]);
   }
 
   private serviceGetShows(page: number): Subscription {
-      return this._showService.getShows(page).subscribe((data) => {
+      return this._showService.getShows(page).subscribe((data: Paged<Show>) => {
           this.shows = data;
-          console.log(data);
-          for (let i = 0; i < data.data.length; i++) {
-              this.rows.push( { name: data.data[i].name }); // FIXME This is not workling.
-          }
+          console.log(this.shows);
       });
   }
 

@@ -15,7 +15,7 @@ export const ROUTES: Routes = [
     { path: 'auth/login', component: LoginComponent },
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'shows', component: ShowsListComponent, canActivate: [AuthGuard] },
-    { path: 'shows/{id}', component: ShowsViewComponent, canActivate: [AuthGuard] },
+    { path: 'shows/:id', component: ShowsViewComponent, canActivate: [AuthGuard] },
     { path: 'roster', component: RosterListComponent, canActivate: [AuthGuard] },
     { path: 'roster/{id}', component: RosterViewComponent, canActivate: [AuthGuard] }, // 'wrestler/{id} instead?
     { path: 'championships', component: ChampionshipListComponent, canActivate: [AuthGuard] },

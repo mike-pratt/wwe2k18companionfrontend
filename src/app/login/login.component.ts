@@ -34,20 +34,20 @@ export class LoginComponent implements OnInit {
           email: this.loginForm.value.email,
           password: this.loginForm.value.password
       };
-      console.log(loginDTO);
+      // console.log(loginDTO);
       this.servicePostLogin(loginDTO);
   }
 
   private servicePostLogin(loginDTO: LoginDTO): Subscription {
       return this.authService.postLogin(loginDTO.email, loginDTO.password).subscribe((authUser) => {
-          console.log('successful login');
+          // console.log('successful login');
           this.authUser = authUser;
-          console.log('success ', this.authUser);
+          // console.log('success ', this.authUser);
           this.router.navigate(['/']);
       }, (error) => {
           console.log('error ', error);
       }, () => {
-          console.log('Someting else has happened');
+          // console.log('Someting else has happened');
       });
   }
 

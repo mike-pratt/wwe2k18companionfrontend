@@ -2,17 +2,22 @@
   <div class="row">
     <button class="btn btn-primary">Add Show</button>
   </div>
-  <div class="row content-row">
+  <div class="row content-row" *ngIf="shows">
     <ngx-datatable
             class="bootstrap"
-            [selectionType]="single"
-            [rows]="rows"
+            [selectionType]="'single'"
+            [rows]="shows.data"
             [columns]="columns"
-            [count]="15"
-            [offset]="0"
-            [limit]="15"
+            [count]="shows.total"
+            [columnMode]="'force'"
+            [headerHeight]="'auto'"
+            [footerHeight]="'auto'"
+            [rowHeight]="'auto'"
+            [externalPaging]="true"
+            [offset]="pageOffset"
+            [limit]="shows.per_page"
             (page)="goToPage($event)"
-            (select)="selectShow($event)"
+            (select)="goToView($event)"
     >
     </ngx-datatable>
   </div>

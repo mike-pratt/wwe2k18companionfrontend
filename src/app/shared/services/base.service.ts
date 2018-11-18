@@ -33,13 +33,13 @@ export class BaseService {
         const newRequestHeaders = new Headers(this.headers);
         let isAuthorised = false;
         const authToken = includeAuthHeader ? AuthService.getAuthToken() : null;
-        console.log('Auth Token included in header: ', authToken);
+        // console.log('Auth Token included in header: ', authToken);
         if (authToken) {
             // isAuthorised = true; // FIXME: withCredentials should be true, but commenting this out makes it false. Which is not the proper way, but the app is now correctly consuming the REST API.
                                    // FIXME: so investigate this issue at a later date. Look at removing the Authorization header in the allowedHeaders array in the cors.php file in config, then setting isAuthorised here to true??
             // ALSO, have to log in each time the app is refreshed. fix this!
             newRequestHeaders.append('Authorization', 'Bearer' + authToken.token);
-            console.log('new request headers ', newRequestHeaders);
+           // console.log('new request headers ', newRequestHeaders);
         }
 
         return new RequestOptions({

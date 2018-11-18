@@ -20,7 +20,7 @@ export class AuthService extends BaseService {
 
         const authToken: AuthToken = JSON.parse(authTokenData);
 
-        console.log('auth token : ', authToken);
+        // console.log('auth token : ', authToken);
 
         if (!authToken) {
             return null;
