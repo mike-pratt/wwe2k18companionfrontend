@@ -1,9 +1,20 @@
-<div class="row">
-    <div class="col-md-12">
-        <div class="modal-body text-center">
-            <p>{{modalText}}</p>
-            <button type="button" class="btn btn-default" (click)="confirm()">Confirm</button>
-            <button type="button" class="btn btn-primary" (click)="cancel()">Cancel</button>
+<div class="modal-fade" bsModal #yesNoModal="bs-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{title}}</h4>
+            </div>
+            <div class="modal-body">
+                <h4 class="text-center">
+                    {{message}}
+                </h4>
+            </div>
+            <div class="modal-footer">
+                <div class="btn btn-group">
+                    <button type="button" class="btn btn-default" (click)="confirm()">Confirm</button>
+                    <button type="button" class="btn btn-primary" (click)="cancel()">Cancel</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -13,7 +13,7 @@ import { YesNoDialogModalComponent } from '../../shared/components/yesnodialogmo
 })
 export class ShowsViewComponent implements OnInit {
 
-    @ViewChild('confirmDeleteDialogModal') public confirmDeleteDialogModal: YesNoDialogModalComponent; // TODO: Finish this. iMac keeps running out of RAM 18/11/18
+    @ViewChild('confirmDeleteDialogModal') public confirmDeleteDialogModal: YesNoDialogModalComponent;
     public showForm: FormGroup;
     public editButtonPressed: boolean;
     public show: Show;
@@ -62,6 +62,7 @@ export class ShowsViewComponent implements OnInit {
         // TODO: add shared yes no modal to confirm deletion.
         this.serviceDeleteShow(this.show.id);
     }
+
 
     private showData(): void {
         this.showForm.setValue({

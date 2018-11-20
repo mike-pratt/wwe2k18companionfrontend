@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
-import { AlertModule } from 'ngx-bootstrap';
+import { AlertModule, ModalModule } from 'ngx-bootstrap';
 import { HomeComponent } from './home/home.component';
 import {RouterModule} from '@angular/router';
 import {ROUTES} from './app.routes';
@@ -45,7 +45,8 @@ import {ShowServiceService} from './shared/services/shows/show-service.service';
         SharedModule,
         ComponentsModule,
         NgxDatatableModule,
-        AngularFontAwesomeModule
+        AngularFontAwesomeModule,
+        ModalModule.forRoot()
     ],
     providers: [AuthGuard,
                 AuthService,

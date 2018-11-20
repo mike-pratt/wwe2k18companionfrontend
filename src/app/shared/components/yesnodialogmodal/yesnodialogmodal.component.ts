@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output, Input} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input, ViewChild } from '@angular/core';
+import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-yesnodialogmodal',
@@ -14,7 +15,12 @@ export class YesNoDialogModalComponent implements OnInit {
     public cancelPressed: EventEmitter<void> = new EventEmitter<void>();
 
     @Input()
-    public modalText: string;
+    public title: string;
+
+    @Input()
+    public message: string;
+
+    @ViewChild('yesNoModal') public yesNoModal: ModalDirective;
 
     constructor() { }
 
@@ -23,10 +29,20 @@ export class YesNoDialogModalComponent implements OnInit {
 
     public confirm(): void {
         this.confirmPressed.emit();
+        this.closeModal();
     }
 
     public cancel(): void {
-        this.cancelPressed.emit();
+        this.closeModal();
+        // this.cancelPressed.emit();
+    }
+
+    public openModal(): void {
+        this.yesNoModal.show();
+    }
+
+    public closeModal(): void {
+        this.yesNoModal.hide();
     }
 
 }
