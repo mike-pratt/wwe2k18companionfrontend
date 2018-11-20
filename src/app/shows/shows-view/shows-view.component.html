@@ -28,4 +28,4 @@
         </form>
     </div>
 </div>
-<app-yesnodialogmodal #confirmDeleteDialogModal [title]="'Delete Show'" [message]="'Are you sure you want to delete this show?'" (confirmPressed)="deleteShow()"></app-yesnodialogmodal>
+<app-yesnodialogmodal #confirmDeleteDialogModal [title]="'Delete Show'" [message]="'Are you sure you want to delete this show?'" (confirmPressed)="deleteShow()" (cancelPressed)="confirmDeleteDialogModal.closeModal()"></app-yesnodialogmodal>

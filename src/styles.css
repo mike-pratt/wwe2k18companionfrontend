@@ -33,6 +33,12 @@
     background-color: #ff3822;
     color: #FFF;
 }
+
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row:hover {
+    background-color: #ff3822;
+    color: #FFF;
+    cursor: pointer;
+}
 .ngx-datatable.bootstrap .datatable-footer {
     background: #424242;
     color: #ededed;

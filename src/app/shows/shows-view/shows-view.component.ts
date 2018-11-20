@@ -59,8 +59,8 @@ export class ShowsViewComponent implements OnInit {
     }
 
     public deleteShow(): void {
-        // TODO: add shared yes no modal to confirm deletion.
         this.serviceDeleteShow(this.show.id);
+        this._router.navigate(['/shows']); // Show no longer exists, so move back to the list component.
     }
 
 
@@ -74,7 +74,6 @@ export class ShowsViewComponent implements OnInit {
     private serviceGetShow(showId: number): Subscription {
         return this._showService.getShowById(showId).subscribe((data) => {
             this.show = data;
-            console.log(this.show);
             this.showData();
         });
     }
