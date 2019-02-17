@@ -36,10 +36,20 @@ export class ShowsListComponent implements OnInit {
       this._router.navigate(['shows', show.id]);
   }
 
+  public createShow(show): void {
+      this.serviceCreateShow(show).add(() => {
+          this.serviceGetShows(this.pageOffset);
+      });
+  }
+
   private serviceGetShows(page: number): Subscription {
       return this._showService.getShows(page).subscribe((data: Paged<Show>) => {
           this.shows = data;
       });
+  }
+
+  private serviceCreateShow(show: Show): Subscription {
+      return this._showService.createShow(show).subscribe();
   }
 
 }

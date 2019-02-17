@@ -23,6 +23,7 @@ import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {ShowServiceService} from './shared/services/shows/show-service.service';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ShowsCreateComponent } from './shows/modals/shows-create/shows-create.component';
 
     @NgModule({
     declarations: [
@@ -36,6 +37,7 @@ import { NavbarComponent } from './navbar/navbar.component';
         ChampionshipListComponent,
         ChampionshipViewComponent,
         ShowsViewComponent,
+        ShowsCreateComponent,
     ],
     imports: [
         BrowserModule,

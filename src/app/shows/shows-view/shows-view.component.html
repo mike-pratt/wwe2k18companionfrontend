@@ -1,31 +1,37 @@
 <div class="row" *ngIf="show">
     <div class="col-md-10 col-md-offset-1">
-        <button class="btn btn-default" (click)="editShow()" *ngIf="!editButtonPressed">Edit</button>
-        <div class="btn-group" *ngIf="editButtonPressed">
-            <button class="btn btn-primary" (click)="saveShow()" [disabled]="!showForm.valid">Save</button>
-            <button class="btn btn-default" (click)="cancelEditShow()">Cancel</button>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-default" (click)="editShow()" *ngIf="!editButtonPressed">Edit</button>
+                <div class="btn-group" *ngIf="editButtonPressed">
+                    <button class="btn btn-primary" (click)="saveShow()" [disabled]="!showForm.valid">Save</button>
+                    <button class="btn btn-default" (click)="cancelEditShow()">Cancel</button>
+                </div>
+                <button class="btn btn-danger" (click)="confirmDeleteDialogModal.openModal()">Delete</button>
+            </div>
         </div>
-        <button class="btn btn-danger" (click)="confirmDeleteDialogModal.openModal()">Delete</button>
-    </div>
-    <div class="col-md-10 col-md-offset-1">
-        <form [formGroup]="showForm">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" formControlName="name" id="name" [readonly]="!editButtonPressed">
+        <div class="row">
+            <div class="col-md-12">
+                <form [formGroup]="showForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" formControlName="name" id="name" [readonly]="!editButtonPressed">
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="primary_display">Primary Display</label>
-                        <input type="checkbox" class="form-control" formControlName="primary_display" id="primary_display" [readonly]="!editButtonPressed">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="primary_display">Primary Display</label>
+                                <input type="checkbox" class="form-control" formControlName="primary_display" id="primary_display" [readonly]="!editButtonPressed">
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 <app-yesnodialogmodal #confirmDeleteDialogModal [title]="'Delete Show'" [message]="'Are you sure you want to delete this show?'" (confirmPressed)="deleteShow()" (cancelPressed)="confirmDeleteDialogModal.closeModal()"></app-yesnodialogmodal>

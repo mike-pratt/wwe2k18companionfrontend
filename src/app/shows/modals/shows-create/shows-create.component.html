@@ -1,0 +1,37 @@
+<div class="modal fade" bsModal #createModal="bs-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Create Show</h4>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="showForm">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" formControlName="name" id="name">
+                                <div *ngIf="showForm.controls['name'].hasError('required') && showForm.controls['name'].touched" class="alert alert-danger">Field is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="primary_display">Primary Display</label>
+                                <input type="checkbox" class="form-control" formControlName="primary_display" id="primary_display" [readonly]="!editButtonPressed">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="closeModal()">Cancel</button>
+                <!--<div class="btn btn-group">-->
+                    <button type="button" class="btn btn-default" (click)="showForm.reset()">Clear</button>
+                    <button type="button" class="btn btn-primary" (click)="createShow()" [disabled]="!showForm.valid">Create</button>
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+</div>

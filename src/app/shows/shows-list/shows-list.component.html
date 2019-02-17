@@ -1,7 +1,9 @@
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <div class="row">
-            <button class="btn btn-primary">Add Show</button>
+            <!--<div class="col-md-12">-->
+            <button class="btn btn-primary" (click)="createShowModal.openModal()">Add Show</button>
+            <!--</div>-->
         </div>
         <div class="row" *ngIf="shows">
             <div class="col-md-12">
@@ -26,3 +28,6 @@
         </div>
     </div>
 </div>
+<app-shows-create #createShowModal
+                  (confirmPressed)="createShow($event)"
+></app-shows-create>

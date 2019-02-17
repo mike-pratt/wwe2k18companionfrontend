@@ -2,7 +2,7 @@ import {BaseModel} from '../base.model';
 
 export class Show extends BaseModel {
     public name: string;
-    public primary_display: string;
+    public primary_display: number;
 
     constructor(data: Show) {
         super(data);

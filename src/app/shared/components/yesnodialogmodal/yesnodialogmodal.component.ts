@@ -1,12 +1,13 @@
 import { Component, EventEmitter, OnInit, Output, Input, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
+import { IModal } from '../modals/IModal';
 
 @Component({
   selector: 'app-yesnodialogmodal',
   templateUrl: './yesnodialogmodal.component.html',
   styleUrls: ['./yesnodialogmodal.component.css']
 })
-export class YesNoDialogModalComponent implements OnInit {
+export class YesNoDialogModalComponent implements OnInit, IModal {
 
     @Output()
     public confirmPressed: EventEmitter<void> = new EventEmitter<void>();
