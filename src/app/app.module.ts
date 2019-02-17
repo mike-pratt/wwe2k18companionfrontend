@@ -22,10 +22,12 @@ import { ShowsViewComponent } from './shows/shows-view/shows-view.component';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {ShowServiceService} from './shared/services/shows/show-service.service';
+import { NavbarComponent } from './navbar/navbar.component';
 
     @NgModule({
     declarations: [
         AppComponent,
+        NavbarComponent,
         HomeComponent,
         LoginComponent,
         ShowsListComponent,
