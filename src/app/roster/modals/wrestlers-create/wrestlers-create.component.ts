@@ -3,6 +3,9 @@ import { ModalDirective } from 'ngx-bootstrap';
 import { IModal } from '../../../shared/components/modals/IModal';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Wrestler } from '../../../shared/models/roster/wrestler.model';
+import { ShowServiceService } from '../../../shared/services/shows/show-service.service';
+import { Subscription } from 'rxjs/Subscription';
+import { Show } from '../../../shared/models/shows/show.model';
 
 @Component({
     selector: 'app-wrestlers-create',
@@ -19,16 +22,20 @@ export class WrestlersCreateComponent implements OnInit, IModal {
 
     public wrestlerForm: FormGroup;
 
-    constructor(private _fb: FormBuilder) {
+    public shows: Show[];
+
+    constructor(private _fb: FormBuilder,
+                private _showService: ShowServiceService) {
         this.wrestlerForm = this._fb.group({
             name: [null, Validators.compose([Validators.required])],
             hometown: [null, Validators.compose([Validators.required])],
             height: [null, Validators.compose([Validators.required])],
-            weight: [null, Validators.compose([Validators.required])],
+            weight: [null, Validators.compose([Validators.required])], // TODO: Add drop down to select from a list of shows.
         });
     }
 
     ngOnInit() {
+        this.serviceGetShows();
     }
 
     public openModal(): void {
@@ -50,6 +57,13 @@ export class WrestlersCreateComponent implements OnInit, IModal {
 
         this.confirmPressed.emit(wrestler);
         this.closeModal();
+    }
+
+    private serviceGetShows(): Subscription { // TODO: Use paged instead?
+        return this._showService.getAllShows().subscribe((data: Show[]) => {
+            this.shows = data;
+            console.log(this.shows);
+        });
     }
 
 }

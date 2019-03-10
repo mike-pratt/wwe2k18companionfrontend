@@ -20,6 +20,13 @@ export class ShowServiceService extends BaseService { // TODO: Rename ShowServic
           });
   }
 
+  public getAllShows(): Observable<Show[]> {
+      return this._http.get(this.actionUrl + '/all', this.getRequestOptions())
+          .map((data) => {
+            return data.json();
+          });
+  }
+
   public getShowById(id: number): Observable<Show> {
       return this._http.get(this.actionUrl + '/' + id, this.getRequestOptions())
           .map((data) => {
