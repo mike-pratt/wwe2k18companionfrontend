@@ -24,6 +24,7 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {ShowServiceService} from './shared/services/shows/show-service.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ShowsCreateComponent } from './shows/modals/shows-create/shows-create.component';
+import { WrestlerService } from './shared/services/roster/wrestler.service';
 
     @NgModule({
     declarations: [
@@ -55,7 +56,9 @@ import { ShowsCreateComponent } from './shows/modals/shows-create/shows-create.c
     providers: [AuthGuard,
                 AuthService,
                 PersistenceService,
-                ShowServiceService],
+                ShowServiceService,
+                WrestlerService,
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

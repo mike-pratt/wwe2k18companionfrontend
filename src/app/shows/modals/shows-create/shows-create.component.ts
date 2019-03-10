@@ -15,7 +15,7 @@ export class ShowsCreateComponent implements OnInit, IModal {
     public confirmPressed: EventEmitter<Show> = new EventEmitter<Show>();
 
     @ViewChild('createModal')
-    public createModal: ModalDirective
+    public createModal: ModalDirective;
 
     public showForm: FormGroup;
 

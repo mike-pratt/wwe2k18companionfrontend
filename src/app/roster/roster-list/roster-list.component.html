@@ -1,3 +1,31 @@
-<p>
-  roster-list works!
-</p>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="row">
+            <button class="btn btn-primary" (click)="createWrestlerModal.openModal()">Add Show</button>
+        </div>
+        <div class="row" *ngIf="wrestlers">
+            <div class="col-md-12">
+                <ngx-datatable
+                        class="bootstrap"
+                        [selectionType]="'single'"
+                        [rows]="wrestlers.data"
+                        [columns]="columns"
+                        [count]="wrestlers.total"
+                        [columnMode]="'force'"
+                        [headerHeight]="'auto'"
+                        [footerHeight]="'auto'"
+                        [rowHeight]="'auto'"
+                        [externalPaging]="true"
+                        [offset]="pageOffset"
+                        [limit]="wrestlers.per_page"
+                        (page)="goToPage($event)"
+                        (select)="goToView($event)"
+                >
+                </ngx-datatable>
+            </div>
+        </div>
+    </div>
+</div>
+<app-shows-create #createWrestlerModal
+                  (confirmPressed)="createShow($event)"
+></app-shows-create>
