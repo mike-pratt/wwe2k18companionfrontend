@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-10 col-md-offset-1">
         <div class="row">
-            <button class="btn btn-primary" (click)="createWrestlerModal.openModal()">Add Show</button>
+            <button class="btn btn-primary" (click)="createWrestlerModal.openModal()">Add Wrestler</button>
         </div>
         <div class="row" *ngIf="wrestlers">
             <div class="col-md-12">
@@ -26,6 +26,6 @@
         </div>
     </div>
 </div>
-<app-shows-create #createWrestlerModal
-                  (confirmPressed)="createShow($event)"
-></app-shows-create>
+<app-wrestlers-create #createWrestlerModal
+                  (confirmPressed)="createWrestler($event)"
+></app-wrestlers-create>

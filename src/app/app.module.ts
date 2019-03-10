@@ -25,6 +25,7 @@ import {ShowServiceService} from './shared/services/shows/show-service.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ShowsCreateComponent } from './shows/modals/shows-create/shows-create.component';
 import { WrestlerService } from './shared/services/roster/wrestler.service';
+import { WrestlersCreateComponent } from './roster/modals/wrestlers-create/wrestlers-create.component';
 
     @NgModule({
     declarations: [
@@ -39,6 +40,7 @@ import { WrestlerService } from './shared/services/roster/wrestler.service';
         ChampionshipViewComponent,
         ShowsViewComponent,
         ShowsCreateComponent,
+        WrestlersCreateComponent,
     ],
     imports: [
         BrowserModule,

@@ -1,0 +1,56 @@
+<div class="modal fade" bsModal #createModal="bs-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">Create Wrestler</h4>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="wrestlerForm">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" formControlName="name" id="name">
+                                <div *ngIf="wrestlerForm.controls['name'].hasError('required') && wrestlerForm.controls['name'].touched" class="alert alert-danger">Field is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="name">Hometown</label>
+                                <input type="text" class="form-control" formControlName="hometown" id="hometown">
+                                <div *ngIf="wrestlerForm.controls['hometown'].hasError('required') && wrestlerForm.controls['hometown'].touched" class="alert alert-danger">Field is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="name">Height</label>
+                                <input type="text" class="form-control" formControlName="height" id="height">
+                                <div *ngIf="wrestlerForm.controls['height'].hasError('required') && wrestlerForm.controls['height'].touched" class="alert alert-danger">Field is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="name">Weight</label>
+                                <input type="number" class="form-control" formControlName="weight" id="weight">
+                                <div *ngIf="wrestlerForm.controls['weight'].hasError('required') && wrestlerForm.controls['weight'].touched" class="alert alert-danger">Field is required.</div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="closeModal()">Cancel</button>
+                <!--<div class="btn btn-group">-->
+                <button type="button" class="btn btn-default" (click)="wrestlerForm.reset()">Clear</button>
+                <button type="button" class="btn btn-primary" (click)="createWrestler()" [disabled]="!wrestlerForm.valid">Create</button>
+                <!--</div>-->
+            </div>
+        </div>
+    </div>
+</div>
