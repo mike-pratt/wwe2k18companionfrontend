@@ -17,9 +17,19 @@ export const ROUTES: Routes = [
     { path: 'shows', component: ShowsListComponent, canActivate: [AuthGuard] },
     { path: 'shows/:id', component: ShowsViewComponent, canActivate: [AuthGuard] },
     { path: 'roster', component: RosterListComponent, canActivate: [AuthGuard] },
-    { path: 'roster/{id}', component: RosterViewComponent, canActivate: [AuthGuard] }, // 'wrestler/{id} instead?
+    { path: 'wrestler/:id', component: RosterViewComponent, canActivate: [AuthGuard] }, // TODO: Refactor Roster to Wrestler. and also into children paths, see commented out code below.
     { path: 'championships', component: ChampionshipListComponent, canActivate: [AuthGuard] },
-    { path: 'championships/{id}', component: ChampionshipViewComponent, canActivate: [AuthGuard] },
+    { path: 'championships/:id', component: ChampionshipViewComponent, canActivate: [AuthGuard] },
+    // {
+    //     path: 'wrestlers',
+    //     component: WrestlersComponent,
+    //     canActivate: [AuthGuard],
+    //     children: [
+    //         { path: '', redirectTo: 'list', pathMatch: 'full' },
+    //         { path: 'list', component: WrestlersListComponent },
+    //         { path: 'view/:id' component: WrestlersViewComponent }
+    //     ]
+    // },
 
     // { path: 'auth/logout', component: LogoutComponent, canActivate: [AuthGuard] },
     // { path: 'auth/changepassword', component: AuthChangePasswordComponent, canActivate: [AuthGuard] }, // Temp, remove
@@ -27,17 +37,4 @@ export const ROUTES: Routes = [
     // { path: '**', component: NoContentComponent }
 
     //  { path: 'forgot-password', component: ForgotPasswordComponent },
-
-    // {
-    //     path: 'assemblies',
-    //     component: AssembliesComponent,
-    //     canActivate: [AuthGuard],
-    //     children: [
-    //         { path: '', redirectTo: 'list', pathMatch: 'full' },
-    //         { path: 'list', component: AssembliesListComponent },
-    //         { path: 'view/:id', component: AssembliesViewComponent },
-    //         // { path: 'create', component: AssembliesCreateComponent },
-    //     ]
-    //     // { path: 'view/:id/part/:id', component: PartsCurrentViewComponent }
-    // },
 ];

@@ -36,7 +36,7 @@ export class RosterListComponent implements OnInit {
 
     public goToView(event: any): void {
         const wrestler = event.selected[0];
-        this._router.navigate(['wrestlers', wrestler.id]);
+        this._router.navigate(['wrestler', wrestler.id]);
     }
 
     public createWrestler(show): void {
