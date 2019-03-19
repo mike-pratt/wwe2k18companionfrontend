@@ -42,6 +42,16 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="show_id">Show</label>
+                                <select class="form-control" formControlName="show_id" id="show_id">
+                                    <option *ngFor="let show of shows" [value]="show.id">{{show.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">

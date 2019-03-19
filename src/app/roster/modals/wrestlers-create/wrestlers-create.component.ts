@@ -30,7 +30,8 @@ export class WrestlersCreateComponent implements OnInit, IModal {
             name: [null, Validators.compose([Validators.required])],
             hometown: [null, Validators.compose([Validators.required])],
             height: [null, Validators.compose([Validators.required])],
-            weight: [null, Validators.compose([Validators.required])], // TODO: Add drop down to select from a list of shows.
+            weight: [null, Validators.compose([Validators.required])],
+            show_id: [null]
         });
     }
 
@@ -43,6 +44,7 @@ export class WrestlersCreateComponent implements OnInit, IModal {
     }
 
     public closeModal(): void {
+        this.wrestlerForm.reset();
         this.createModal.hide();
     }
 
@@ -52,7 +54,8 @@ export class WrestlersCreateComponent implements OnInit, IModal {
             name: this.wrestlerForm.value.name,
             hometown: this.wrestlerForm.value.hometown,
             height: this.wrestlerForm.value.height,
-            weight: this.wrestlerForm.value.weight
+            weight: this.wrestlerForm.value.weight,
+            show_id: this.wrestlerForm.value.show_id
         });
 
         this.confirmPressed.emit(wrestler);
