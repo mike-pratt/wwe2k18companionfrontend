@@ -6,11 +6,11 @@ import { Subscription } from 'rxjs/Subscription';
 import { WrestlerService } from '../../shared/services/roster/wrestler.service';
 
 @Component({
-  selector: 'app-roster-list',
-  templateUrl: './roster-list.component.html',
-  styleUrls: ['./roster-list.component.css']
+  selector: 'app-wrestlers-list',
+  templateUrl: './wrestlers-list.component.html',
+  styleUrls: ['./wrestlers-list.component.css']
 })
-export class RosterListComponent implements OnInit {
+export class WrestlersListComponent implements OnInit {
 
     public pageOffset = 0;
     public columns = [
@@ -36,7 +36,7 @@ export class RosterListComponent implements OnInit {
 
     public goToView(event: any): void {
         const wrestler = event.selected[0];
-        this._router.navigate(['wrestler', wrestler.id]);
+        this._router.navigate(['wrestlers/view', wrestler.id]);
     }
 
     public createWrestler(show): void {
