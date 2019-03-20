@@ -7,6 +7,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {WrestlerService} from '../../shared/services/roster/wrestler.service';
 import {IBaseModelViewComponent} from '../../shared/models/common/view-component.interface';
 import {ShowServiceService} from '../../shared/services/shows/show-service.service';
+import {Show} from '../../shared/models/shows/show.model';
+import {isNullOrUndefined} from '@swimlane/ngx-datatable/release/utils';
 
 @Component({
   selector: 'app-wrestlers-view',
@@ -19,6 +21,7 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
     public form: FormGroup;
     public editButtonPressed: boolean;
     public wrestler: Wrestler;
+    public shows: Show[];
 
     private routerSub: Subscription;
 
@@ -38,31 +41,37 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
 
     ngOnInit() {
         this.routerSub = this._activatedRoute.params.subscribe((params) => {
-            let id = params['id'];
+            const id = params['id'];
             if (id) {
-              this.serviceGetById(id);
+                this.serviceGetById(id).add(() => {
+                    this.serviceGetShows();
+                });
             } else {
-              this._router.navigate(['/wrestlers']);
+                this._router.navigate(['/wrestlers']);
             }
         });
+        this.form.get('show_id').disable();
     }
 
     public edit(): void {
         this.editButtonPressed = true;
+      this.form.get('show_id').enable();
     }
 
     public saveChanges(): void {
         this.editButtonPressed = false;
+        this.form.get('show_id').disable();
         this.wrestler.name = this.form.value.name;
         this.wrestler.hometown = this.form.value.hometown;
         this.wrestler.height = this.form.value.height;
         this.wrestler.weight = this.form.value.weight;
-        this.wrestler.show_id = this.form.value.show_id;
+        this.wrestler.show_id = this.form.value.show_id; // FIXME: Does not seem to be getting the show id selected from the dropdown.
         this.serviceUpdate(this.wrestler);
     }
 
     public cancelEdit(): void {
         this.editButtonPressed = false;
+        this.form.get('show_id').disable();
         this.showData();
     }
 
@@ -96,5 +105,11 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
     private serviceDelete(id: number): Subscription {
         return this._wrestlerService.deleteWrestler(id).subscribe();
     }
+
+  private serviceGetShows(): Subscription {
+      return this._showService.getAllShows().subscribe((data: Show[]) => {
+          this.shows = data;
+      });
+  }
 
 }

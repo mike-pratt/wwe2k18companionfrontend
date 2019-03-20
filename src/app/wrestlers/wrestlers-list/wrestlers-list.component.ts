@@ -31,7 +31,7 @@ export class WrestlersListComponent implements OnInit {
     }
 
     public goToPage(event): void {
-
+        this.serviceGetWrestlers(event.offset + 1);
     }
 
     public goToView(event: any): void {
@@ -47,7 +47,6 @@ export class WrestlersListComponent implements OnInit {
 
     private serviceGetWrestlers(page: number): Subscription {
         return this._wrestlerService.getWrestlers(page).subscribe((data: Paged<Wrestler>) => {
-            console.log(data);
             this.wrestlers = data;
         });
     }

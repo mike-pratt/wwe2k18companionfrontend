@@ -65,7 +65,6 @@ export class WrestlersCreateComponent implements OnInit, IModal {
     private serviceGetShows(): Subscription { // TODO: Use paged instead?
         return this._showService.getAllShows().subscribe((data: Show[]) => {
             this.shows = data;
-            console.log(this.shows);
         });
     }
 
