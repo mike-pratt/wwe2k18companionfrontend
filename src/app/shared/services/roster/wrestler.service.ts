@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from '../base.service';
 import { Http, Response } from '@angular/http';
-import { Wrestler } from '../../models/roster/wrestler.model';
+import { Wrestler } from '../../models/wrestlers/wrestler.model';
 import { Paged } from '../../models/paged.model';
 import { Observable } from 'rxjs/Observable';
 

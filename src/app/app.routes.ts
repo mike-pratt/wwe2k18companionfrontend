@@ -9,16 +9,13 @@ import {WrestlersViewComponent} from './wrestlers/wrestlers-view/wrestlers-view.
 import {ChampionshipListComponent} from './championships/championship-list/championship-list.component';
 import {ChampionshipViewComponent} from './championships/championship-view/championship-view.component';
 import {WrestlersComponent} from './wrestlers/wrestlers.component';
+import {ShowsComponent} from './shows/shows.component';
 
 
 export const ROUTES: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'auth/login', component: LoginComponent },
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-    { path: 'shows', component: ShowsListComponent, canActivate: [AuthGuard] },
-    { path: 'shows/:id', component: ShowsViewComponent, canActivate: [AuthGuard] },
-   // { path: 'wrestlers', component: WrestlersListComponent, canActivate: [AuthGuard] },
-   // { path: 'wrestler/:id', component: WrestlersViewComponent, canActivate: [AuthGuard] }, // TODO: Refactor Roster to Wrestler. and also into children paths, see commented out code below.
     { path: 'championships', component: ChampionshipListComponent, canActivate: [AuthGuard] },
     { path: 'championships/:id', component: ChampionshipViewComponent, canActivate: [AuthGuard] },
     {
@@ -29,6 +26,16 @@ export const ROUTES: Routes = [
             { path: '', redirectTo: 'list', pathMatch: 'full' },
             { path: 'list', component: WrestlersListComponent },
             { path: 'view/:id', component: WrestlersViewComponent }
+        ]
+    },
+    {
+        path: 'shows',
+        component: ShowsComponent,
+        canActivate: [AuthGuard],
+        children: [
+            { path: '', redirectTo: 'list', pathMatch: 'full' },
+            { path: 'list', component: ShowsListComponent },
+            { path: 'view/:id', component: ShowsViewComponent }
         ]
     },
 

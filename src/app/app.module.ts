@@ -21,12 +21,13 @@ import { ChampionshipViewComponent } from './championships/championship-view/cha
 import { ShowsViewComponent } from './shows/shows-view/shows-view.component';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
-import {ShowServiceService} from './shared/services/shows/show-service.service';
+import {ShowService} from './shared/services/shows/show.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ShowsCreateComponent } from './shows/modals/shows-create/shows-create.component';
 import { WrestlerService } from './shared/services/roster/wrestler.service';
 import { WrestlersCreateComponent } from './wrestlers/modals/wrestlers-create/wrestlers-create.component';
 import {WrestlersComponent} from './wrestlers/wrestlers.component';
+import {ShowsComponent} from './shows/shows.component';
 
     @NgModule({
     declarations: [
@@ -39,6 +40,7 @@ import {WrestlersComponent} from './wrestlers/wrestlers.component';
         WrestlersViewComponent,
         ChampionshipListComponent,
         ChampionshipViewComponent,
+        ShowsComponent,
         ShowsViewComponent,
         ShowsCreateComponent,
         WrestlersComponent,
@@ -60,7 +62,7 @@ import {WrestlersComponent} from './wrestlers/wrestlers.component';
     providers: [AuthGuard,
                 AuthService,
                 PersistenceService,
-                ShowServiceService,
+                ShowService,
                 WrestlerService,
     ],
     bootstrap: [AppComponent]

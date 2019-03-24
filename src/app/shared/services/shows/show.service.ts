@@ -6,7 +6,7 @@ import {Paged} from '../../models/paged.model';
 import {Show} from '../../models/shows/show.model';
 
 @Injectable()
-export class ShowServiceService extends BaseService { // TODO: Rename ShowServiceService :P
+export class ShowService extends BaseService { // TODO: Rename ShowService :P
 
   constructor(_http: Http) {
     super(_http);

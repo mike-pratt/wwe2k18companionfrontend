@@ -1,14 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Wrestler} from '../../shared/models/roster/wrestler.model';
+import {Wrestler} from '../../shared/models/wrestlers/wrestler.model';
 import {YesNoDialogModalComponent} from '../../shared/components/yesnodialogmodal/yesnodialogmodal.component';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {WrestlerService} from '../../shared/services/roster/wrestler.service';
 import {IBaseModelViewComponent} from '../../shared/models/common/view-component.interface';
-import {ShowServiceService} from '../../shared/services/shows/show-service.service';
+import {ShowService} from '../../shared/services/shows/show.service';
 import {Show} from '../../shared/models/shows/show.model';
-import {isNullOrUndefined} from '@swimlane/ngx-datatable/release/utils';
 
 @Component({
   selector: 'app-wrestlers-view',
@@ -28,7 +27,7 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
     constructor(private _router: Router,
                 private _activatedRoute: ActivatedRoute,
                 private _wrestlerService: WrestlerService,
-                private _showService: ShowServiceService,
+                private _showService: ShowService,
                 private fb: FormBuilder) {
         this.form = fb.group({
           name: [null, Validators.compose([Validators.required])],

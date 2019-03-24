@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
-import {ShowServiceService} from '../../shared/services/shows/show-service.service';
+import {ShowService} from '../../shared/services/shows/show.service';
 import {Paged} from '../../shared/models/paged.model';
 import {Show} from '../../shared/models/shows/show.model';
 import { Router } from '@angular/router';
@@ -19,7 +19,7 @@ export class ShowsListComponent implements OnInit {
 
     public shows: Paged<Show>;
 
-    constructor(private _showService: ShowServiceService,
+    constructor(private _showService: ShowService,
               private _router: Router) {
     }
 
@@ -33,7 +33,7 @@ export class ShowsListComponent implements OnInit {
 
     public goToView(event: any): void {
         const show = event.selected[0];
-        this._router.navigate(['shows', show.id]);
+        this._router.navigate(['shows/view', show.id]);
     }
 
     public createShow(show): void {

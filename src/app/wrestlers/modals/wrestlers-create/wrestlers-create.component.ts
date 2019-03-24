@@ -2,8 +2,8 @@ import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/cor
 import { ModalDirective } from 'ngx-bootstrap';
 import { IModal } from '../../../shared/components/modals/IModal';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Wrestler } from '../../../shared/models/roster/wrestler.model';
-import { ShowServiceService } from '../../../shared/services/shows/show-service.service';
+import { Wrestler } from '../../../shared/models/wrestlers/wrestler.model';
+import { ShowService } from '../../../shared/services/shows/show.service';
 import { Subscription } from 'rxjs/Subscription';
 import { Show } from '../../../shared/models/shows/show.model';
 
@@ -25,7 +25,7 @@ export class WrestlersCreateComponent implements OnInit, IModal {
     public shows: Show[];
 
     constructor(private _fb: FormBuilder,
-                private _showService: ShowServiceService) {
+                private _showService: ShowService) {
         this.wrestlerForm = this._fb.group({
             name: [null, Validators.compose([Validators.required])],
             hometown: [null, Validators.compose([Validators.required])],

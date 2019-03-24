@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { ShowServiceService } from '../../shared/services/shows/show-service.service';
+import { ShowService } from '../../shared/services/shows/show.service';
 import { Show } from '../../shared/models/shows/show.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { YesNoDialogModalComponent } from '../../shared/components/yesnodialogmodal/yesnodialogmodal.component';
@@ -22,7 +22,7 @@ export class ShowsViewComponent implements OnInit {
 
     constructor(private _router: Router,
                 private _activatedRoute: ActivatedRoute,
-                private _showService: ShowServiceService,
+                private _showService: ShowService,
                 private fb: FormBuilder) {
         this.showForm = fb.group({
             name: [null, Validators.compose([Validators.required])],
