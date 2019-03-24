@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
             this.router.navigate(['/shows']);
             break;
         case 1: // Roster
-            this.router.navigate(['/roster']);
+            this.router.navigate(['/wrestlers']);
             break;
         case 2: // Championships
             this.router.navigate(['/championships']);

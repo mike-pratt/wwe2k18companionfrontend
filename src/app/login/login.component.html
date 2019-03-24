@@ -12,7 +12,8 @@
                 <input type="password" class="form-control" id="password" formControlName="password">
                 <div *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched" class="alert alert-danger">Required</div>
             </div>
-            <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid">Login</button>
+            <div *ngIf="loginCredentialsInvalid" class="alert alert-danger">Invalid username or password.</div>
+            <button class="btn btn-primary" type="submit" id="login" [disabled]="!loginForm.valid">Login</button>
         </form>
     </div>
 </div>

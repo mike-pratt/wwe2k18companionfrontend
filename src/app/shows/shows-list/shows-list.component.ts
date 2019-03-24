@@ -28,7 +28,7 @@ export class ShowsListComponent implements OnInit {
     }
 
     public goToPage(event): void {
-
+        this.serviceGetShows(event.offset + 1);
     }
 
     public goToView(event: any): void {

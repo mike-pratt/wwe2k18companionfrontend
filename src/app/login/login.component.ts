@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   public loginForm: FormGroup;
+  public loginCredentialsInvalid: boolean;
   private authUser: AuthUser;
 
   constructor(public fb: FormBuilder,
@@ -40,14 +41,12 @@ export class LoginComponent implements OnInit {
 
   private servicePostLogin(loginDTO: LoginDTO): Subscription {
       return this.authService.postLogin(loginDTO.email, loginDTO.password).subscribe((authUser) => {
-          // console.log('successful login');
+          this.loginCredentialsInvalid = false;
           this.authUser = authUser;
-          // console.log('success ', this.authUser);
           this.router.navigate(['/']);
       }, (error) => {
-          console.log('error ', error);
+          this.loginCredentialsInvalid = true;
       }, () => {
-          // console.log('Someting else has happened');
       });
   }
 

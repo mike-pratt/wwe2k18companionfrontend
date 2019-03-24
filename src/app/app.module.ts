@@ -14,8 +14,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from './shared/shared.module';
 import {ComponentsModule} from './shared/components/components.module';
 import { ShowsListComponent } from './shows/shows-list/shows-list.component';
-import { RosterListComponent } from './roster/roster-list/roster-list.component';
-import { RosterViewComponent } from './roster/roster-view/roster-view.component';
+import { WrestlersListComponent } from './wrestlers/wrestlers-list/wrestlers-list.component';
+import { WrestlersViewComponent } from './wrestlers/wrestlers-view/wrestlers-view.component';
 import { ChampionshipListComponent } from './championships/championship-list/championship-list.component';
 import { ChampionshipViewComponent } from './championships/championship-view/championship-view.component';
 import { ShowsViewComponent } from './shows/shows-view/shows-view.component';
@@ -25,7 +25,8 @@ import {ShowServiceService} from './shared/services/shows/show-service.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ShowsCreateComponent } from './shows/modals/shows-create/shows-create.component';
 import { WrestlerService } from './shared/services/roster/wrestler.service';
-import { WrestlersCreateComponent } from './roster/modals/wrestlers-create/wrestlers-create.component';
+import { WrestlersCreateComponent } from './wrestlers/modals/wrestlers-create/wrestlers-create.component';
+import {WrestlersComponent} from './wrestlers/wrestlers.component';
 
     @NgModule({
     declarations: [
@@ -34,12 +35,13 @@ import { WrestlersCreateComponent } from './roster/modals/wrestlers-create/wrest
         HomeComponent,
         LoginComponent,
         ShowsListComponent,
-        RosterListComponent,
-        RosterViewComponent,
+        WrestlersListComponent,
+        WrestlersViewComponent,
         ChampionshipListComponent,
         ChampionshipViewComponent,
         ShowsViewComponent,
         ShowsCreateComponent,
+        WrestlersComponent,
         WrestlersCreateComponent,
     ],
     imports: [
