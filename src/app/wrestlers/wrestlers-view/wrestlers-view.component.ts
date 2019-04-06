@@ -4,7 +4,7 @@ import {YesNoDialogModalComponent} from '../../shared/components/yesnodialogmoda
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
-import {WrestlerService} from '../../shared/services/roster/wrestler.service';
+import {WrestlerService} from '../../shared/services/wrestlers/wrestler.service';
 import {IBaseModelViewComponent} from '../../shared/models/common/view-component.interface';
 import {ShowService} from '../../shared/services/shows/show.service';
 import {Show} from '../../shared/models/shows/show.model';

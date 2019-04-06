@@ -2,11 +2,13 @@ import {BaseModel} from '../base.model';
 
 export class Championship extends BaseModel {
     public name: string;
-    public isCruiserweight: boolean;
+    public level: number;
+    public champion_id: number;
 
     constructor(data: Championship) {
         super(data);
         this.name = data.name;
-        this.isCruiserweight = data.isCruiserweight;
+        this.level = data.level;
+        this.champion_id = data.champion_id;
     }
 }

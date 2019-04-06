@@ -56,14 +56,11 @@ export class ChampionshipsCreateComponent implements OnInit {
       id: undefined,
       name: this.form.value.name,
       level: this.form.value.level,
-      show_id: this.form.value.show_id,
-      wrestler_id: this.form.value.wrestler_id,
+      champion_id: this.form.value.wrestler_id,
     });
-    if (championship.show_id === null) {
-      championship.show_id = undefined; // Don't pass in POST request.
-    }
-    if (championship.wrestler_id === null) {
-      championship.wrestler_id = undefined;
+
+    if (championship.champion_id === null) {
+      championship.champion_id = undefined;
     }
 
     this.confirmPressed.emit(championship);

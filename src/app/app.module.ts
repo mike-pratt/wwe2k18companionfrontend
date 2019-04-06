@@ -16,18 +16,19 @@ import {ComponentsModule} from './shared/components/components.module';
 import { ShowsListComponent } from './shows/shows-list/shows-list.component';
 import { WrestlersListComponent } from './wrestlers/wrestlers-list/wrestlers-list.component';
 import { WrestlersViewComponent } from './wrestlers/wrestlers-view/wrestlers-view.component';
-import { ChampionshipListComponent } from './championships/championship-list/championship-list.component';
-import { ChampionshipViewComponent } from './championships/championship-view/championship-view.component';
 import { ShowsViewComponent } from './shows/shows-view/shows-view.component';
 import {NgxDatatableModule} from '@swimlane/ngx-datatable';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 import {ShowService} from './shared/services/shows/show.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ShowsCreateComponent } from './shows/modals/shows-create/shows-create.component';
-import { WrestlerService } from './shared/services/roster/wrestler.service';
+import { WrestlerService } from './shared/services/wrestlers/wrestler.service';
 import { WrestlersCreateComponent } from './wrestlers/modals/wrestlers-create/wrestlers-create.component';
-import {WrestlersComponent} from './wrestlers/wrestlers.component';
-import {ShowsComponent} from './shows/shows.component';
+import { WrestlersComponent } from './wrestlers/wrestlers.component';
+import { ShowsComponent } from './shows/shows.component';
+import { ChampionshipsListComponent } from './championships/championships-list/championships-list.component';
+import { ChampionshipsViewComponent } from './championships/championships-view/championships-view.component';
+import { ChampionshipsComponent } from './championships/championships.component';
 
     @NgModule({
     declarations: [
@@ -38,8 +39,9 @@ import {ShowsComponent} from './shows/shows.component';
         ShowsListComponent,
         WrestlersListComponent,
         WrestlersViewComponent,
-        ChampionshipListComponent,
-        ChampionshipViewComponent,
+        ChampionshipsListComponent,
+        ChampionshipsViewComponent,
+        ChampionshipsComponent,
         ShowsComponent,
         ShowsViewComponent,
         ShowsCreateComponent,
