@@ -1,3 +1,31 @@
-<p>
-  championship-list works!
-</p>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="row">
+            <button class="btn btn-primary" (click)="createChampionshipModal.openModal()">Add Show</button>
+        </div>
+        <div class="row" *ngIf="championships">
+            <div class="col-md-12">
+                <ngx-datatable
+                        class="bootstrap"
+                        [selectionType]="'single'"
+                        [rows]="championships.data"
+                        [columns]="columns"
+                        [count]="championships.total"
+                        [columnMode]="'force'"
+                        [headerHeight]="'auto'"
+                        [footerHeight]="'auto'"
+                        [rowHeight]="'auto'"
+                        [externalPaging]="true"
+                        [offset]="pageOffset"
+                        [limit]="championships.per_page"
+                        (page)="goToPage($event)"
+                        (select)="goToView($event)"
+                >
+                </ngx-datatable>
+            </div>
+        </div>
+    </div>
+</div>
+<app-championships-create #createChampionshipModal
+                  (confirmPressed)="createChampionship($event)"
+></app-championships-create>
