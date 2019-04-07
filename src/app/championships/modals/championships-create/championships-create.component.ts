@@ -27,19 +27,18 @@ export class ChampionshipsCreateComponent implements OnInit {
   public wrestlers: Wrestler[];
 
   constructor(private _fb: FormBuilder,
-              private _showService: ShowService,
-              private _wrestlerService: WrestlerService) {
+              // private _showService: ShowService,
+              // private _wrestlerService: WrestlerService) {
+  ){
     this.form = this._fb.group({
       name: [null, Validators.compose([Validators.required])],
       level: [null, Validators.compose([Validators.required])],
-      show_id: [null],
-      wrestler_id: [null]
     });
   }
 
   ngOnInit() {
-    this.serviceGetShows();
-    this.serviceGetWrestlers();
+    // this.serviceGetShows();
+    // this.serviceGetWrestlers();
   }
 
   public openModal(): void {
@@ -56,27 +55,28 @@ export class ChampionshipsCreateComponent implements OnInit {
       id: undefined,
       name: this.form.value.name,
       level: this.form.value.level,
-      champion_id: this.form.value.wrestler_id,
+      champion_id: undefined
+      // champion_id: this.form.value.wrestler_id,
     });
 
-    if (championship.champion_id === null) {
-      championship.champion_id = undefined;
-    }
+    // if (championship.champion_id === null) {
+    //   championship.champion_id = undefined;
+    // }
 
     this.confirmPressed.emit(championship);
     this.closeModal();
   }
 
-  private serviceGetShows(): Subscription {
-    return this._showService.getAllShows().subscribe((data: Show[]) => {
-      this.shows = data;
-    });
-  }
-
-  private serviceGetWrestlers(): Subscription {
-    return this._wrestlerService.getWrestlers(0).subscribe((data) => { // FIXME: Only gets the first page of wrestlers.
-      this.wrestlers = data.data;
-    });
-  }
+  // private serviceGetShows(): Subscription {
+  //   return this._showService.getAllShows().subscribe((data: Show[]) => {
+  //     this.shows = data;
+  //   });
+  // }
+  //
+  // private serviceGetWrestlers(): Subscription {
+  //   return this._wrestlerService.getWrestlers(0).subscribe((data) => { // FIXME: Only gets the first page of wrestlers.
+  //     this.wrestlers = data.data;
+  //   });
+  // }
 
 }

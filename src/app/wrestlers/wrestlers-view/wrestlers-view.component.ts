@@ -54,7 +54,7 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
 
     public edit(): void {
         this.editButtonPressed = true;
-      this.form.get('show_id').enable();
+        this.form.get('show_id').enable();
     }
 
     public saveChanges(): void {

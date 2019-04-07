@@ -25,7 +25,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label for="name">Hometown</label>
+                <label for="hometown">Hometown</label>
                 <input type="text" class="form-control" formControlName="hometown" id="hometown" [readonly]="!editButtonPressed">
                 <div *ngIf="form.controls['hometown'].hasError('required') && form.controls['hometown'].touched" class="alert alert-danger">Field is required.</div>
               </div>
@@ -34,7 +34,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label for="name">Height</label>
+                <label for="height">Height</label>
                 <input type="text" class="form-control" formControlName="height" id="height" [readonly]="!editButtonPressed">
                 <div *ngIf="form.controls['height'].hasError('required') && form.controls['height'].touched" class="alert alert-danger">Field is required.</div>
               </div>
@@ -43,7 +43,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label for="name">Weight</label>
+                <label for="weight">Weight</label>
                 <input type="number" class="form-control" formControlName="weight" id="weight" [readonly]="!editButtonPressed">
                 <div *ngIf="form.controls['weight'].hasError('required') && form.controls['weight'].touched" class="alert alert-danger">Field is required.</div>
               </div>

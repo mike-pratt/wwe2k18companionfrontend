@@ -45,28 +45,48 @@ export class ChampionshipsViewComponent implements OnInit, IBaseModelViewCompone
             if (id) {
                 this.serviceGetById(id).add(() => {
                     this.serviceGetChampionById(this.championship.champion_id);
-                    this.serviceGetShowsThatChampionshipBelongsTo();
+                    this.serviceGetShowsThatChampionshipBelongsTo(id);
                 });
             } else {
                 this._router.navigate(['/championships']);
             }
         });
-        this.form.get('show_id').disable();
     }
 
     cancelEdit(): void {
+        this.editButtonPressed = false;
+        this.showData();
     }
 
     delete(): void {
+        this.serviceDelete(this.championship.id);
+        this._router.navigate(['/championships']);
     }
 
     edit(): void {
+        this.editButtonPressed = true;
     }
 
     saveChanges(): void {
+        this.editButtonPressed = false;
+        this.form.get('show_id').disable();
+        this.championship.name = this.form.value.name;
+        this.championship.level = this.form.value.level;
+        this.championship.champion_id = this.form.value.champion_id;
+
+        if (this.championship.champion_id === null) {
+            this.championship.champion_id = undefined;
+        }
+
+        this.serviceUpdate(this.championship);
     }
 
     showData(): void {
+        this.form.setValue({
+            name: this.championship.name,
+            level: this.championship.level,
+            champion_id: this.championship.champion_id
+        });
     }
 
     private serviceGetById(id: number): Subscription {
@@ -83,7 +103,7 @@ export class ChampionshipsViewComponent implements OnInit, IBaseModelViewCompone
         });
     }
 
-    private serviceUpdateChampionship(championship: Championship): Subscription {
+    private serviceUpdate(championship: Championship): Subscription {
         return this._championshipService.updateChampionship(championship).subscribe();
     }
 
@@ -91,8 +111,8 @@ export class ChampionshipsViewComponent implements OnInit, IBaseModelViewCompone
         return this._championshipService.deleteChampionship(id).subscribe();
     }
 
-    private serviceGetShowsThatChampionshipBelongsTo(): Subscription {
-        return this._championshipService.getShows().subscribe((data: Show[]) => {
+    private serviceGetShowsThatChampionshipBelongsTo(id: number): Subscription {
+        return this._championshipService.getShows(id).subscribe((data: Show[]) => {
             this.shows = data;
         });
     }
