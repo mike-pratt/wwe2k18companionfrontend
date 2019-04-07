@@ -69,15 +69,14 @@ export class ChampionshipsViewComponent implements OnInit, IBaseModelViewCompone
 
     saveChanges(): void {
         this.editButtonPressed = false;
-        this.form.get('show_id').disable();
         this.championship.name = this.form.value.name;
         this.championship.level = this.form.value.level;
-        this.championship.champion_id = this.form.value.champion_id;
 
-        if (this.championship.champion_id === null) {
-            this.championship.champion_id = undefined;
-        }
+        this.serviceUpdate(this.championship);
+    }
 
+    updateChampion(): void {
+        this.championship.champion_id = 2; // new id passed from generic components event emitter.
         this.serviceUpdate(this.championship);
     }
 
@@ -85,7 +84,7 @@ export class ChampionshipsViewComponent implements OnInit, IBaseModelViewCompone
         this.form.setValue({
             name: this.championship.name,
             level: this.championship.level,
-            champion_id: this.championship.champion_id
+            champion_id: this.champion !== undefined ? this.champion.name : null
         });
     }
 

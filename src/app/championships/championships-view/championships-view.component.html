@@ -35,21 +35,20 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="champion_id">Current Champion</label>
-                                <input type="text" class="form-control" formControlName="champion_id" id="champion_id" [readonly]="!editButtonPressed">
+                                <input type="text" class="form-control" formControlName="champion_id" id="champion_id" readonly>
                                 <div *ngIf="form.controls['champion_id'].hasError('required') && form.controls['champion_id'].touched" class="alert alert-danger">Field is required.</div>
+                            </div>
+                            <button class="btn btn-primary" (click)="updateChampion()">Change Champion</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="show_id">Show</label>
+                                <p id="show_id">list of shows</p>
                             </div>
                         </div>
                     </div>
-<!--                    <div class="row">-->
-<!--                        <div class="col-md-12">-->
-<!--                            <div class="form-group">-->
-<!--                                <label for="show_id">Show</label>-->
-<!--                                <select class="form-control" formControlName="show_id" id="show_id">-->
-<!--                                    <option *ngFor="let show of shows" [value]="show.id">{{show.name}}</option>-->
-<!--                                </select>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>div-->
                 </form>
             </div>
         </div>

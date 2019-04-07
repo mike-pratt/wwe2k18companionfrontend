@@ -3,7 +3,7 @@ import {BaseModel} from '../base.model';
 export class Championship extends BaseModel {
     public name: string;
     public level: number;
-    public champion_id: number;
+    public champion_id?: number;
 
     constructor(data: Championship) {
         super(data);
