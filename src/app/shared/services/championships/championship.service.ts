@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Paged } from '../../models/paged.model';
 import { BaseService } from '../base.service';
 import { Championship } from '../../models/championships/championship.model';
+import { Show } from '../../models/shows/show.model';
 
 @Injectable()
 export class ChampionshipService extends BaseService  {
@@ -25,6 +26,13 @@ export class ChampionshipService extends BaseService  {
         .map((data) => {
           return data.json();
         });
+  }
+
+  public getShows(championshipId: number): Observable<Show[]> {
+      return this._http.get(this.actionUrl + '/' + championshipId + '/shows', this.getRequestOptions())
+          .map((data) => {
+              return data.json();
+          });
   }
 
   public updateChampionship(championship: Championship): Observable<Response> {
