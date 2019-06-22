@@ -4,6 +4,7 @@ import { Http, Response } from '@angular/http';
 import { Wrestler } from '../../models/wrestlers/wrestler.model';
 import { Paged } from '../../models/paged.model';
 import { Observable } from 'rxjs/Observable';
+import { ChampionshipReign } from '../../models/championships/championship-reign.model';
 
 @Injectable()
 export class WrestlerService extends BaseService {
@@ -25,6 +26,11 @@ export class WrestlerService extends BaseService {
             .map((data) => {
                 return data.json();
             });
+    }
+
+    public getChampionshipRegins(wrestlerId: number): Observable<Paged<ChampionshipReign>> {
+        return this._http.get(this.actionUrl + '/' + wrestlerId + '/championship-reigns', this.getRequestOptions())
+            .map(data => data.json());
     }
 
     public updateWrestler(wrestler: Wrestler): Observable<Response> {

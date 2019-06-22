@@ -6,23 +6,6 @@
         <div class="row" *ngIf="wrestlers">
             <div class="col-md-12">
               <app-data-table (onPageChange)="goToPage($event)" (onRowClick)="goToView($event)" [columns]="columns" [paginatedData]="wrestlers" ></app-data-table>
-<!--                <ngx-datatable-->
-<!--                        class="bootstrap"-->
-<!--                        [selectionType]="'single'"-->
-<!--                        [rows]="wrestlers.data"-->
-<!--                        [columns]="columns"-->
-<!--                        [count]="wrestlers.total"-->
-<!--                        [columnMode]="'force'"-->
-<!--                        [headerHeight]="'auto'"-->
-<!--                        [footerHeight]="'auto'"-->
-<!--                        [rowHeight]="'auto'"-->
-<!--                        [externalPaging]="true"-->
-<!--                        [offset]="pageOffset"-->
-<!--                        [limit]="wrestlers.per_page"-->
-<!--                        (page)="goToPage($event)"-->
-<!--                        (select)="goToView($event)"-->
-<!--                >-->
-<!--                </ngx-datatable>-->
             </div>
         </div>
     </div>

@@ -31,6 +31,7 @@ export class WrestlersListComponent implements OnInit {
     }
 
     public goToPage(pageNumber: number): void {
+        this.pageOffset = pageNumber;
         this.serviceGetWrestlers(pageNumber);
     }
 
