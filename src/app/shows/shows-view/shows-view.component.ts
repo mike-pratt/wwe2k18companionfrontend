@@ -5,16 +5,17 @@ import { ShowService } from '../../shared/services/shows/show.service';
 import { Show } from '../../shared/models/shows/show.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { YesNoDialogModalComponent } from '../../shared/components/yesnodialogmodal/yesnodialogmodal.component';
+import { IBaseModelViewComponent } from '../../shared/models/common/view-component.interface';
 
 @Component({
   selector: 'app-shows-view',
   templateUrl: './shows-view.component.html',
   styleUrls: ['./shows-view.component.css']
 })
-export class ShowsViewComponent implements OnInit {
+export class ShowsViewComponent implements OnInit, IBaseModelViewComponent {
 
     @ViewChild('confirmDeleteDialogModal') public confirmDeleteDialogModal: YesNoDialogModalComponent;
-    public showForm: FormGroup;
+    public form: FormGroup;
     public editButtonPressed: boolean;
     public show: Show;
 
@@ -24,7 +25,7 @@ export class ShowsViewComponent implements OnInit {
                 private _activatedRoute: ActivatedRoute,
                 private _showService: ShowService,
                 private fb: FormBuilder) {
-        this.showForm = fb.group({
+        this.form = fb.group({
             name: [null, Validators.compose([Validators.required])],
             primary_display: [null]
         });
@@ -41,31 +42,31 @@ export class ShowsViewComponent implements OnInit {
         });
     }
 
-    public editShow(): void {
+    public edit(): void {
       this.editButtonPressed = true;
     }
 
-    public saveShow(): void {
+    public saveChanges(): void {
         this.editButtonPressed = false;
-        this.show.name = this.showForm.value.name;
-        this.show.primary_display = this.showForm.value.primary_display;
+        this.show.name = this.form.value.name;
+        this.show.primary_display = this.form.value.primary_display;
 
         this.serviceUpdateShow(this.show);
     }
 
-    public cancelEditShow(): void {
+    public cancelEdit(): void {
       this.editButtonPressed = false;
       this.showData();
     }
 
-    public deleteShow(): void {
+    public delete(): void {
         this.serviceDeleteShow(this.show.id);
         this._router.navigate(['/shows']); // Show no longer exists, so move back to the list component.
     }
 
 
-    private showData(): void {
-        this.showForm.setValue({
+    public showData(): void {
+        this.form.setValue({
             name: this.show.name,
             primary_display: this.show.primary_display
         });

@@ -58,6 +58,10 @@ export class WrestlersCreateComponent implements OnInit, IModal {
             show_id: this.wrestlerForm.value.show_id
         });
 
+        if (wrestler.show_id === null) {
+            wrestler.show_id = undefined;
+        }
+
         this.confirmPressed.emit(wrestler);
         this.closeModal();
     }
