@@ -8,6 +8,8 @@ import {WrestlerService} from '../../shared/services/wrestlers/wrestler.service'
 import {IBaseModelViewComponent} from '../../shared/models/common/view-component.interface';
 import {ShowService} from '../../shared/services/shows/show.service';
 import {Show} from '../../shared/models/shows/show.model';
+import { ChampionshipReign } from '../../shared/models/championships/championship-reign.model';
+import { Paged } from '../../shared/models/paged.model';
 
 @Component({
   selector: 'app-wrestlers-view',
@@ -21,6 +23,13 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
     public editButtonPressed: boolean;
     public wrestler: Wrestler;
     public shows: Show[];
+    public championshipReigns: Paged<ChampionshipReign>;
+
+    public championshipReignsColumns = [
+        // { name: 'Name', prop: 'name' },
+        // { name: 'Number of Reigns', prop: '' },
+        { name: 'Days', prop: 'days' },
+    ];
 
     private routerSub: Subscription;
 
@@ -44,6 +53,7 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
             if (id) {
                 this.serviceGetById(id).add(() => {
                     this.serviceGetShows();
+                    this.serviceGetChampionshipReigns(id);
                 });
             } else {
                 this._router.navigate(['/wrestlers']);
@@ -108,6 +118,13 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
   private serviceGetShows(): Subscription {
       return this._showService.getAllShows().subscribe((data: Show[]) => {
           this.shows = data;
+      });
+  }
+
+  private serviceGetChampionshipReigns(wrestlerId: number): Subscription {
+      return this._wrestlerService.getChampionshipRegins(wrestlerId).subscribe(data => {
+          this.championshipReigns = data;
+          console.log(data);
       });
   }
 

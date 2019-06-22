@@ -30,12 +30,12 @@ export class WrestlersListComponent implements OnInit {
         this.serviceGetWrestlers(0);
     }
 
-    public goToPage(event): void {
-        this.serviceGetWrestlers(event.offset + 1);
+    public goToPage(pageNumber: number): void {
+        this.pageOffset = pageNumber;
+        this.serviceGetWrestlers(pageNumber);
     }
 
-    public goToView(event: any): void {
-        const wrestler = event.selected[0];
+    public goToView(wrestler: Wrestler): void {
         this._router.navigate(['wrestlers/view', wrestler.id]);
     }
 
