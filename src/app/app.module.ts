@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
-import { AlertModule, ModalModule } from 'ngx-bootstrap';
+import { AlertModule, ModalModule, TabsModule } from 'ngx-bootstrap';
 import { HomeComponent } from './home/home.component';
 import {RouterModule} from '@angular/router';
 import {ROUTES} from './app.routes';
@@ -51,19 +51,20 @@ import { ChampionshipService } from './shared/services/championships/championshi
         WrestlersComponent,
         WrestlersCreateComponent,
     ],
-    imports: [
-        BrowserModule,
-        HttpModule,
-        FormsModule,
-        ReactiveFormsModule,
-        RouterModule.forRoot(ROUTES),
-        AlertModule.forRoot(),
-        SharedModule,
-        ComponentsModule,
-        NgxDatatableModule,
-        AngularFontAwesomeModule,
-        ModalModule.forRoot()
-    ],
+        imports: [
+            BrowserModule,
+            HttpModule,
+            FormsModule,
+            ReactiveFormsModule,
+            RouterModule.forRoot(ROUTES),
+            AlertModule.forRoot(),
+            SharedModule,
+            ComponentsModule,
+            NgxDatatableModule,
+            AngularFontAwesomeModule,
+            ModalModule.forRoot(),
+            TabsModule.forRoot()
+        ],
     providers: [AuthGuard,
                 AuthService,
                 PersistenceService,

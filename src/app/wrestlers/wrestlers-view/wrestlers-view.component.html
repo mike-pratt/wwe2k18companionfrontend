@@ -2,64 +2,78 @@
   <div class="col-md-10 col-md-offset-1">
     <div class="row">
       <div class="col-md-12">
-        <button class="btn btn-default" (click)="edit()" *ngIf="!editButtonPressed">Edit</button>
-        <div class="btn-group" *ngIf="editButtonPressed">
-          <button class="btn btn-primary" (click)="saveChanges()" [disabled]="!form.valid">Save</button>
-          <button class="btn btn-default" (click)="cancelEdit()">Cancel</button>
-        </div>
-        <button class="btn btn-danger" (click)="confirmDeleteDialogModal.openModal()">Delete</button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <form [formGroup]="form">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" formControlName="name" id="name" [readonly]="!editButtonPressed">
-                <div *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched" class="alert alert-danger">Field is required.</div>
+        <tabset>
+          <tab heading="Details">
+            <div class="row">
+              <div class="col-md-12" [style.margin-top]="'10px'">
+                <button class="btn btn-default" (click)="edit()" *ngIf="!editButtonPressed">Edit</button>
+                <div class="btn-group" *ngIf="editButtonPressed">
+                  <button class="btn btn-primary" (click)="saveChanges()" [disabled]="!form.valid">Save</button>
+                  <button class="btn btn-default" (click)="cancelEdit()">Cancel</button>
+                </div>
+                <button class="btn btn-danger" (click)="confirmDeleteDialogModal.openModal()">Delete</button>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label for="hometown">Hometown</label>
-                <input type="text" class="form-control" formControlName="hometown" id="hometown" [readonly]="!editButtonPressed">
-                <div *ngIf="form.controls['hometown'].hasError('required') && form.controls['hometown'].touched" class="alert alert-danger">Field is required.</div>
+            <div class="row">
+              <div class="col-md-12">
+                <form [formGroup]="form">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" formControlName="name" id="name" [readonly]="!editButtonPressed">
+                        <div *ngIf="form.controls['name'].hasError('required') && form.controls['name'].touched" class="alert alert-danger">Field is required.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="hometown">Hometown</label>
+                        <input type="text" class="form-control" formControlName="hometown" id="hometown" [readonly]="!editButtonPressed">
+                        <div *ngIf="form.controls['hometown'].hasError('required') && form.controls['hometown'].touched" class="alert alert-danger">Field is required.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="height">Height</label>
+                        <input type="text" class="form-control" formControlName="height" id="height" [readonly]="!editButtonPressed">
+                        <div *ngIf="form.controls['height'].hasError('required') && form.controls['height'].touched" class="alert alert-danger">Field is required.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="weight">Weight</label>
+                        <input type="number" class="form-control" formControlName="weight" id="weight" [readonly]="!editButtonPressed">
+                        <div *ngIf="form.controls['weight'].hasError('required') && form.controls['weight'].touched" class="alert alert-danger">Field is required.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="show_id">Show</label>
+                        <select class="form-control" formControlName="show_id" id="show_id">
+                          <option *ngFor="let show of shows" [value]="show.id">{{show.name}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label for="height">Height</label>
-                <input type="text" class="form-control" formControlName="height" id="height" [readonly]="!editButtonPressed">
-                <div *ngIf="form.controls['height'].hasError('required') && form.controls['height'].touched" class="alert alert-danger">Field is required.</div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label for="weight">Weight</label>
-                <input type="number" class="form-control" formControlName="weight" id="weight" [readonly]="!editButtonPressed">
-                <div *ngIf="form.controls['weight'].hasError('required') && form.controls['weight'].touched" class="alert alert-danger">Field is required.</div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group">
-                <label for="show_id">Show</label>
-                <select class="form-control" formControlName="show_id" id="show_id">
-                  <option *ngFor="let show of shows" [value]="show.id">{{show.name}}</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </form>
+          </tab>
+          <tab heading="Championship Reigns">
+
+          </tab>
+          <tab heading="Rivalries">
+            <p>Rivalries</p>
+          </tab>
+        </tabset>
       </div>
     </div>
   </div>

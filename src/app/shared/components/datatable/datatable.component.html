@@ -1,0 +1,19 @@
+<div class="col-md-12">
+  <ngx-datatable
+          class="bootstrap"
+          [selectionType]="'single'"
+          [rows]="paginatedData.data"
+          [columns]="columns"
+          [count]="paginatedData.total"
+          [columnMode]="'force'"
+          [headerHeight]="'auto'"
+          [footerHeight]="'auto'"
+          [rowHeight]="'auto'"
+          [externalPaging]="true"
+          [offset]="pageOffset"
+          [limit]="paginatedData.per_page"
+          (page)="goToPage($event)"
+          (select)="goToView($event)"
+  >
+  </ngx-datatable>
+</div>
