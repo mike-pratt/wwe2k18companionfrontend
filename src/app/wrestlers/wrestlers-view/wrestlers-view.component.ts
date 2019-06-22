@@ -10,6 +10,7 @@ import {ShowService} from '../../shared/services/shows/show.service';
 import {Show} from '../../shared/models/shows/show.model';
 import { ChampionshipReign } from '../../shared/models/championships/championship-reign.model';
 import { Paged } from '../../shared/models/paged.model';
+import { ChampionshipService } from '../../shared/services/championships/championship.service';
 
 @Component({
   selector: 'app-wrestlers-view',
@@ -19,6 +20,7 @@ import { Paged } from '../../shared/models/paged.model';
 export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
 
     @ViewChild('confirmDeleteDialogModal') public confirmDeleteDialogModal: YesNoDialogModalComponent;
+
     public form: FormGroup;
     public editButtonPressed: boolean;
     public wrestler: Wrestler;
@@ -26,8 +28,8 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
     public championshipReigns: Paged<ChampionshipReign>;
 
     public championshipReignsColumns = [
-        // { name: 'Name', prop: 'name' },
-        // { name: 'Number of Reigns', prop: '' },
+        { name: 'Name', prop: 'name' },
+        { name: 'Number of Reigns', prop: 'number_of_reigns' },
         { name: 'Days', prop: 'days' },
     ];
 
@@ -37,6 +39,7 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
                 private _activatedRoute: ActivatedRoute,
                 private _wrestlerService: WrestlerService,
                 private _showService: ShowService,
+                private _championshipService: ChampionshipService,
                 private fb: FormBuilder) {
         this.form = fb.group({
           name: [null, Validators.compose([Validators.required])],
@@ -53,7 +56,9 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
             if (id) {
                 this.serviceGetById(id).add(() => {
                     this.serviceGetShows();
-                    this.serviceGetChampionshipReigns(id);
+                    this.serviceGetChampionshipReigns(id).add(() => {
+                        this.serviceGetChampionships();
+                    });
                 });
             } else {
                 this._router.navigate(['/wrestlers']);
@@ -126,6 +131,21 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
           this.championshipReigns = data;
           console.log(data);
       });
+  }
+
+  private serviceGetChampionships(): Subscription {
+        return this._championshipService.getChampionships(0).subscribe(data => {
+            // For each championship, if found in list of reigns, add the championship to the reign.
+            data.data.forEach(championship => this.championshipReigns.data.filter(reign => {
+                if (reign.championship_id === championship.id) {
+                    reign.name = championship.name;
+                    reign.championship = championship;
+                    reign.number_of_reigns = !isNaN(reign.number_of_reigns) ?  reign.number_of_reigns + 1 : 1; // /FIXME Doesn't increment if more than one reign is found!
+                    return reign;
+                }
+            }));
+            console.log(this.championshipReigns.data);
+        });
   }
 
 }

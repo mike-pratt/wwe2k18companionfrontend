@@ -4,12 +4,11 @@ import { Championship } from './championship.model';
 
 
 export class ChampionshipReign extends BaseModel {
-   // public name: string;
-    public days: number;
-
     // Computed property, not provided by API:
-    // public number_of_reigns: number;
+    public number_of_reigns: number;
+    public name: string;
 
+    public days: number;
     public wrestler_id: number;
     public wrestler: Wrestler;
     public championship_id: number;
@@ -17,8 +16,8 @@ export class ChampionshipReign extends BaseModel {
 
     constructor(data: ChampionshipReign) {
         super(data);
-        // this.name = data.name;
         this.days = data.days;
+        this.number_of_reigns = 0;
         this.championship_id = data.championship_id;
         this.wrestler_id = data.wrestler_id;
         this.championship = data.championship;
