@@ -86,3 +86,11 @@
 .row {
     margin-top: 10px !important;
 }
+
+.grey-background {
+    background-color: #66605F;
+}
+
+.off-white-background {
+    background-color: #f9f5f8;
+}
