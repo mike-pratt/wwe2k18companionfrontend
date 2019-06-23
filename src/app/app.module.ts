@@ -31,6 +31,7 @@ import { ChampionshipsViewComponent } from './championships/championships-view/c
 import { ChampionshipsComponent } from './championships/championships.component';
 import { ChampionshipsCreateComponent } from './championships/modals/championships-create/championships-create.component';
 import { ChampionshipService } from './shared/services/championships/championship.service';
+import { WrestlerRivalsResolverService } from './shared/services/wrestlers/wrestler-rivals-resolver.service';
 
     @NgModule({
     declarations: [
@@ -70,7 +71,8 @@ import { ChampionshipService } from './shared/services/championships/championshi
                 PersistenceService,
                 ShowService,
                 WrestlerService,
-                ChampionshipService
+                ChampionshipService,
+                WrestlerRivalsResolverService
     ],
     bootstrap: [AppComponent]
 })

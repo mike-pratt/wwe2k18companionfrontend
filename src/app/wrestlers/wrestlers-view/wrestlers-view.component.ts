@@ -13,6 +13,7 @@ import { Paged } from '../../shared/models/paged.model';
 import { ChampionshipService } from '../../shared/services/championships/championship.service';
 import { Championship } from '../../shared/models/championships/championship.model';
 import { Rivalry } from '../../shared/models/wrestlers/rivalry.model';
+import { WrestlerRivalsResolverService } from '../../shared/services/wrestlers/wrestler-rivals-resolver.service';
 
 @Component({
   selector: 'app-wrestlers-view',
@@ -50,6 +51,7 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
                 private _wrestlerService: WrestlerService,
                 private _showService: ShowService,
                 private _championshipService: ChampionshipService,
+                private _wrestlerRivalLookupService: WrestlerRivalsResolverService,
                 private fb: FormBuilder) {
         this.form = fb.group({
           name: [null, Validators.compose([Validators.required])],
@@ -67,10 +69,16 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
                 this.serviceGetById(id).add(() => {
                     this.serviceGetShows();
                     this.serviceGetRivalries(id).add(() => {
-                        // TODO: This won't work for data on multiple pages, find a better way, like returning the rival in the query itself?
+                        // TODO: This won't work for data on multiple pages, find a better way,
+                        //  like returning the rival in the query itself?
                         this.rivalries.data.forEach(rivalry => {
-                            this.serviceGetRival(rivalry);
+                            const rivalWrestler = this._wrestlerRivalLookupService.allWrestlersForRivalryLookup
+                                .filter(wrestler => wrestler.id === rivalry.rival_id);
+                            if (rivalWrestler[0] !== null) {
+                                rivalry.rival = rivalWrestler[0];
+                            }
                         });
+                        console.log('doctor fuq ', this.rivalries);
                     });
                     this.serviceGetChampionshipReigns(id).add(() => {
                         this.serviceGetChampionships();
@@ -159,7 +167,7 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
         return this._championshipService.getChampionships(0).subscribe(data => {
             this.championships = data;
 
-            let numberOfReignsForEachChampionship = {};
+            const numberOfReignsForEachChampionship = {};
             // For each championship, if found in list of reigns, add the championship to the reign.
             data.data.forEach(championship => this.championshipReigns.data.filter(reign => {
                 if (reign.championship_id === championship.id) {
@@ -175,12 +183,4 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
             console.log(this.championshipReigns.data);
         });
   }
-
-  private serviceGetRival(rivalry: Rivalry): Subscription {
-        const rivalId = rivalry.rival_id;
-        return this._wrestlerService.getWrestlerById(rivalId).subscribe(data => {
-            rivalry.rival = data;
-        });
-  }
-
 }

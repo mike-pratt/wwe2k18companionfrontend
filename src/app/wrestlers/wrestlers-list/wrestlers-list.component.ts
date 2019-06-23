@@ -4,6 +4,7 @@ import { Wrestler } from '../../shared/models/wrestlers/wrestler.model';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { WrestlerService } from '../../shared/services/wrestlers/wrestler.service';
+import { WrestlerRivalsResolverService } from '../../shared/services/wrestlers/wrestler-rivals-resolver.service';
 
 @Component({
   selector: 'app-wrestlers-list',
@@ -23,7 +24,8 @@ export class WrestlersListComponent implements OnInit {
     public wrestlers: Paged<Wrestler>;
 
     constructor(private _wrestlerService: WrestlerService,
-                private _router: Router) {
+                private _router: Router,
+                private _wrestlerRivalLookupService: WrestlerRivalsResolverService) {
     }
 
     ngOnInit() {
@@ -48,6 +50,7 @@ export class WrestlersListComponent implements OnInit {
     private serviceGetWrestlers(page: number): Subscription {
         return this._wrestlerService.getWrestlers(page).subscribe((data: Paged<Wrestler>) => {
             this.wrestlers = data;
+            this._wrestlerRivalLookupService.allWrestlersForRivalryLookup = data.data;
         });
     }
 
