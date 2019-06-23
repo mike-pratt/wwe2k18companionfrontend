@@ -17,7 +17,7 @@ export class WrestlersCreateComponent implements OnInit, IModal {
     @Output()
     public confirmPressed: EventEmitter<Wrestler> = new EventEmitter<Wrestler>();
 
-    @ViewChild('createModal')
+    @ViewChild('createModal', { static: true })
     public createModal: ModalDirective;
 
     public wrestlerForm: FormGroup;

@@ -21,7 +21,7 @@ export class YesNoDialogModalComponent implements OnInit, IModal {
     @Input()
     public message: string;
 
-    @ViewChild('yesNoModal') public yesNoModal: ModalDirective;
+    @ViewChild('yesNoModal', { static: true }) public yesNoModal: ModalDirective;
 
     constructor() { }
 

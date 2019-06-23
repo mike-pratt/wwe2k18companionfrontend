@@ -18,7 +18,7 @@ export class ChampionshipsCreateComponent implements OnInit {
   @Output()
   public confirmPressed: EventEmitter<Championship> = new EventEmitter<Championship>();
 
-  @ViewChild('createModal')
+  @ViewChild('createModal', { static: true })
   public createModal: ModalDirective;
 
   public form: FormGroup;

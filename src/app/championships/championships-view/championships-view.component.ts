@@ -17,7 +17,7 @@ import { Championship } from '../../shared/models/championships/championship.mod
 })
 export class ChampionshipsViewComponent implements OnInit, IBaseModelViewComponent {
 
-    @ViewChild('confirmDeleteDialogModal') public confirmDeleteDialogModal: YesNoDialogModalComponent;
+    @ViewChild('confirmDeleteDialogModal', { static: true }) public confirmDeleteDialogModal: YesNoDialogModalComponent;
     public form: FormGroup;
     public editButtonPressed: boolean;
     public championship: Championship;

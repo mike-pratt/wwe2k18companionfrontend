@@ -14,7 +14,7 @@ import { IBaseModelViewComponent } from '../../shared/models/common/view-compone
 })
 export class ShowsViewComponent implements OnInit, IBaseModelViewComponent {
 
-    @ViewChild('confirmDeleteDialogModal') public confirmDeleteDialogModal: YesNoDialogModalComponent;
+    @ViewChild('confirmDeleteDialogModal', { static: true }) public confirmDeleteDialogModal: YesNoDialogModalComponent;
     public form: FormGroup;
     public editButtonPressed: boolean;
     public show: Show;

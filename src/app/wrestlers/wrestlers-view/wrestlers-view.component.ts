@@ -22,7 +22,7 @@ import { WrestlerRivalsResolverService } from '../../shared/services/wrestlers/w
 })
 export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
 
-    @ViewChild('confirmDeleteDialogModal') public confirmDeleteDialogModal: YesNoDialogModalComponent;
+    @ViewChild('confirmDeleteDialogModal', { static: true }) public confirmDeleteDialogModal: YesNoDialogModalComponent;
 
     public form: FormGroup;
     public editButtonPressed: boolean;
