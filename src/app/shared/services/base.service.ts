@@ -48,7 +48,7 @@ export class BaseService {
         });
     }
 
-    protected static handleErrors(error: Response): ErrorObservable {
+    protected static handleErrors(error: Response): ErrorObservable<undefined> {
         console.error(error);
         return Observable.throw(error.json().error || 'Server Error');
     }
