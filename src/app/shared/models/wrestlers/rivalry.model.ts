@@ -1,8 +1,10 @@
 import { BaseModel } from '../base.model';
+import { Wrestler } from './wrestler.model';
 
 export class Rivalry extends BaseModel {
     public wrestler_id: number;
     public rival_id: number;
+    public rival: Wrestler;
     public level: number;
     public length: string;
     public active: boolean;

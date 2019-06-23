@@ -38,7 +38,7 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
     ];
 
     public rivalriesColumns = [
-        { name: 'Name', prop: 'name' },
+        { name: 'Name', prop: 'rival.name' },
         { name: 'Length', prop: 'length' },
         { name: 'Active', prop: 'active' },
     ];
@@ -66,7 +66,12 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
             if (id) {
                 this.serviceGetById(id).add(() => {
                     this.serviceGetShows();
-                    this.serviceGetRivalries(id);
+                    this.serviceGetRivalries(id).add(() => {
+                        // TODO: This won't work for data on multiple pages, find a better way, like returning the rival in the query itself?
+                        this.rivalries.data.forEach(rivalry => {
+                            this.serviceGetRival(rivalry);
+                        });
+                    });
                     this.serviceGetChampionshipReigns(id).add(() => {
                         this.serviceGetChampionships();
                     });
@@ -154,17 +159,27 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
         return this._championshipService.getChampionships(0).subscribe(data => {
             this.championships = data;
 
+            let numberOfReignsForEachChampionship = {};
             // For each championship, if found in list of reigns, add the championship to the reign.
             data.data.forEach(championship => this.championshipReigns.data.filter(reign => {
                 if (reign.championship_id === championship.id) {
+                    numberOfReignsForEachChampionship[championship.id] =
+                        numberOfReignsForEachChampionship[championship.id] = !isNaN(numberOfReignsForEachChampionship[championship.id]) ?
+                            numberOfReignsForEachChampionship[championship.id] + 1 : 1;
                     reign.name = championship.name;
                     reign.championship = championship;
-                    // FIXME Doesn't increment if more than one reign is found!
-                    reign.number_of_reigns = !isNaN(reign.number_of_reigns) ?  reign.number_of_reigns + 1 : 1;
+                    reign.number_of_reigns = numberOfReignsForEachChampionship[championship.id];
                     return reign;
                 }
             }));
             console.log(this.championshipReigns.data);
+        });
+  }
+
+  private serviceGetRival(rivalry: Rivalry): Subscription {
+        const rivalId = rivalry.rival_id;
+        return this._wrestlerService.getWrestlerById(rivalId).subscribe(data => {
+            rivalry.rival = data;
         });
   }
 
