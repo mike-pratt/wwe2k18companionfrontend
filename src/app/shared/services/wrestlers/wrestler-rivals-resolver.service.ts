@@ -4,8 +4,8 @@ import { Wrestler } from '../../models/wrestlers/wrestler.model';
 @Injectable()
 export class WrestlerRivalsResolverService {
 
-   public allWrestlersForRivalryLookup: Wrestler[];
+    public allWrestlersForRivalryLookup: Wrestler[];
 
-  constructor() { }
+    constructor() { }
 
 }

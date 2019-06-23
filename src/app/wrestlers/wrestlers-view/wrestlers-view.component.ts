@@ -69,16 +69,19 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
                 this.serviceGetById(id).add(() => {
                     this.serviceGetShows();
                     this.serviceGetRivalries(id).add(() => {
+
                         // TODO: This won't work for data on multiple pages, find a better way,
                         //  like returning the rival in the query itself?
                         this.rivalries.data.forEach(rivalry => {
+                            rivalry.active = rivalry.active ? true : false; // Convert output from 0/1 to true/false
+
+                            // FIXME: service.allWrestlers is empty on page refresh.
                             const rivalWrestler = this._wrestlerRivalLookupService.allWrestlersForRivalryLookup
                                 .filter(wrestler => wrestler.id === rivalry.rival_id);
                             if (rivalWrestler[0] !== null) {
                                 rivalry.rival = rivalWrestler[0];
                             }
                         });
-                        console.log('doctor fuq ', this.rivalries);
                     });
                     this.serviceGetChampionshipReigns(id).add(() => {
                         this.serviceGetChampionships();
@@ -98,13 +101,16 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
 
     public saveChanges(): void {
         this.editButtonPressed = false;
-        this.form.get('show_id').disable();
         this.wrestler.name = this.form.value.name;
         this.wrestler.hometown = this.form.value.hometown;
         this.wrestler.height = this.form.value.height;
         this.wrestler.weight = this.form.value.weight;
-        this.wrestler.show_id = this.form.value.show_id; // FIXME: Does not seem to be getting the show id selected from the dropdown.
+        this.wrestler.show_id = Number(this.form.value.show_id);
+        if (this.wrestler.show_id === -1) {
+            this.wrestler.show_id = null;
+        }
         this.serviceUpdate(this.wrestler);
+        this.form.get('show_id').disable();
     }
 
     public cancelEdit(): void {
@@ -147,13 +153,13 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
   private serviceGetShows(): Subscription {
       return this._showService.getAllShows().subscribe((data: Show[]) => {
           this.shows = data;
+          this.shows.push(new Show({id: -1, name: '', primary_display: -1}));
       });
   }
 
   private serviceGetChampionshipReigns(wrestlerId: number): Subscription {
       return this._wrestlerService.getChampionshipRegins(wrestlerId).subscribe(data => {
           this.championshipReigns = data;
-          console.log(data);
       });
   }
 
@@ -180,7 +186,6 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
                     return reign;
                 }
             }));
-            console.log(this.championshipReigns.data);
         });
   }
 }
