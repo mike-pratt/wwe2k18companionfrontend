@@ -68,10 +68,14 @@
             </div>
           </tab>
           <tab heading="Championship Reigns">
-            <app-data-table [columns]="championshipReignsColumns" [paginatedData]="championshipReigns" ></app-data-table>
+            <div *ngIf="championships">
+              <app-data-table [columns]="championshipReignsColumns" [paginatedData]="championshipReigns"></app-data-table>
+            </div>
           </tab>
           <tab heading="Rivalries">
-            <p>Rivalries</p>
+            <div *ngIf="rivalries">
+              <app-data-table [columns]="rivalriesColumns" [paginatedData]="rivalries"></app-data-table>
+            </div>
           </tab>
         </tabset>
       </div>

@@ -11,6 +11,8 @@ import {Show} from '../../shared/models/shows/show.model';
 import { ChampionshipReign } from '../../shared/models/championships/championship-reign.model';
 import { Paged } from '../../shared/models/paged.model';
 import { ChampionshipService } from '../../shared/services/championships/championship.service';
+import { Championship } from '../../shared/models/championships/championship.model';
+import { Rivalry } from '../../shared/models/wrestlers/rivalry.model';
 
 @Component({
   selector: 'app-wrestlers-view',
@@ -26,11 +28,19 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
     public wrestler: Wrestler;
     public shows: Show[];
     public championshipReigns: Paged<ChampionshipReign>;
+    public championships: Paged<Championship>;
+    public rivalries: Paged<Rivalry>;
 
     public championshipReignsColumns = [
         { name: 'Name', prop: 'name' },
         { name: 'Number of Reigns', prop: 'number_of_reigns' },
         { name: 'Days', prop: 'days' },
+    ];
+
+    public rivalriesColumns = [
+        { name: 'Name', prop: 'name' },
+        { name: 'Length', prop: 'length' },
+        { name: 'Active', prop: 'active' },
     ];
 
     private routerSub: Subscription;
@@ -56,6 +66,7 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
             if (id) {
                 this.serviceGetById(id).add(() => {
                     this.serviceGetShows();
+                    this.serviceGetRivalries(id);
                     this.serviceGetChampionshipReigns(id).add(() => {
                         this.serviceGetChampionships();
                     });
@@ -133,14 +144,23 @@ export class WrestlersViewComponent implements OnInit, IBaseModelViewComponent {
       });
   }
 
+  private serviceGetRivalries(wrestlerId: number): Subscription {
+      return this._wrestlerService.getRivalries(wrestlerId).subscribe(data => {
+          this.rivalries = data;
+      });
+  }
+
   private serviceGetChampionships(): Subscription {
         return this._championshipService.getChampionships(0).subscribe(data => {
+            this.championships = data;
+
             // For each championship, if found in list of reigns, add the championship to the reign.
             data.data.forEach(championship => this.championshipReigns.data.filter(reign => {
                 if (reign.championship_id === championship.id) {
                     reign.name = championship.name;
                     reign.championship = championship;
-                    reign.number_of_reigns = !isNaN(reign.number_of_reigns) ?  reign.number_of_reigns + 1 : 1; // /FIXME Doesn't increment if more than one reign is found!
+                    // FIXME Doesn't increment if more than one reign is found!
+                    reign.number_of_reigns = !isNaN(reign.number_of_reigns) ?  reign.number_of_reigns + 1 : 1;
                     return reign;
                 }
             }));

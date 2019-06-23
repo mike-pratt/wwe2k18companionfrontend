@@ -5,6 +5,7 @@ import { Wrestler } from '../../models/wrestlers/wrestler.model';
 import { Paged } from '../../models/paged.model';
 import { Observable } from 'rxjs/Observable';
 import { ChampionshipReign } from '../../models/championships/championship-reign.model';
+import { Rivalry } from '../../models/wrestlers/rivalry.model';
 
 @Injectable()
 export class WrestlerService extends BaseService {
@@ -30,6 +31,11 @@ export class WrestlerService extends BaseService {
 
     public getChampionshipRegins(wrestlerId: number): Observable<Paged<ChampionshipReign>> {
         return this._http.get(this.actionUrl + '/' + wrestlerId + '/championship-reigns', this.getRequestOptions())
+            .map(data => data.json());
+    }
+
+    public getRivalries(wrestlerId: number): Observable<Paged<Rivalry>> {
+        return this._http.get(this.actionUrl + '/' + wrestlerId + '/rivalries', this.getRequestOptions())
             .map(data => data.json());
     }
 
