@@ -1,21 +1,25 @@
-<div class="row">
-    <div class="col-md-10 home">
+<div class="row container-row">
+    <div class="col-md-12">
         <div class="row">
             <div class="col-md-12">
                 <h2>WWE 2k18 Universe Mode Companion App</h2>
             </div>
         </div>
-        <div class="row">
+      <div class="row home">
+        <div class="col-md-12 menu">
+          <div class="row">
             <div class="col-md-12">
-                <app-card [value]="'Shows'" (menuSelection)="doNavigate(0)"></app-card>
-                <app-card [value]="'Wrestlers'" (menuSelection)="doNavigate(1)"></app-card>
+              <app-card [value]="'Shows'" (menuSelection)="doNavigate(0)"></app-card>
+              <app-card [value]="'Wrestlers'" (menuSelection)="doNavigate(1)"></app-card>
             </div>
-        </div>
-        <div class="row">
+          </div>
+          <div class="row">
             <div class="col-md-12">
-                <app-card [value]="'Championships'" (menuSelection)="doNavigate(2)">></app-card>
-                <app-card [value]="'Draft Mode'" (menuSelection)="doNavigate(3)">></app-card>
+              <app-card [value]="'Championships'" (menuSelection)="doNavigate(2)">></app-card>
+              <app-card [value]="'Draft Mode'" (menuSelection)="doNavigate(3)">></app-card>
             </div>
+          </div>
         </div>
+      </div>
     </div>
 </div>
