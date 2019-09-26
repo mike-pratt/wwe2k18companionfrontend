@@ -9,3 +9,12 @@ a {
 .navbar-brand:hover, .nav-link:hover {
     background-color: #302D2C;
 }
+
+.active {
+    background-color: #fff;
+    color: #302D2C;
+}
+
+.active:hover {
+    color: #fff;
+}
