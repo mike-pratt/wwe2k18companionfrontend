@@ -55,4 +55,4 @@
     </div>
 </div>
 <app-yesnodialogmodal #confirmDeleteDialogModal [title]="'Delete Wrestler'" [message]="'Are you sure you want to delete this championship?'" (confirmPressed)="delete()" (cancelPressed)="confirmDeleteDialogModal.closeModal()"></app-yesnodialogmodal>
-<app-datatable-modal #wrestlersDatatable [title]="'Change Champion'" [data]="wrestlers" [columns]="wrestlersColumns"></app-datatable-modal>
+<app-datatable-modal #wrestlersDatatable [title]="'Change Champion'" [data]="wrestlers" [columns]="wrestlersColumns" (onRowClick)="updateChampion($event)"></app-datatable-modal>

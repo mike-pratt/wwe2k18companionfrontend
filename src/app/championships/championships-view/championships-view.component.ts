@@ -92,8 +92,8 @@ export class ChampionshipsViewComponent implements OnInit, IBaseModelViewCompone
         this.wrestlersDatatableModal.open();
     }
 
-    updateChampion(): void {
-        this.championship.champion_id = 2; // new id passed from generic components event emitter.
+    updateChampion(wrestler: Wrestler): void {
+        this.championship.champion_id = wrestler.id; // new id passed from generic components event emitter.
         this.serviceUpdate(this.championship);
     }
 

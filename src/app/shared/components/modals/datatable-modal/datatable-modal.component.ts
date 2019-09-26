@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Paged } from '../../../models/paged.model';
 import { BaseModel } from '../../../models/base.model';
 import { ModalDirective } from 'ngx-bootstrap';
@@ -8,16 +8,14 @@ import { ModalDirective } from 'ngx-bootstrap';
     templateUrl: './datatable-modal.component.html',
     styleUrls: ['./datatable-modal.component.css']
 })
-export class DatatableModalComponent implements OnInit {
+export class DatatableModalComponent {
     @Input('title') public title: string;
     @Input('columns') public columns: {};
     @Input('data') public data: Paged<BaseModel>;
 
-    @ViewChild('modal', { static: true }) public modal: ModalDirective;
+    @Output('onRowClick') public onRowClick: EventEmitter<BaseModel> = new EventEmitter<BaseModel>();
 
-    public ngOnInit(): void {
-        console.log('Data = ', this.data);
-    }
+    @ViewChild('modal', { static: true }) public modal: ModalDirective;
 
     public close(): void {
         this.modal.hide();
@@ -27,7 +25,8 @@ export class DatatableModalComponent implements OnInit {
         this.modal.show();
     }
 
-    public saveSelection(): void {
-        
+    public saveSelection(model: BaseModel): void {
+        this.onRowClick.emit(model);
+        this.close();
     }
 }
