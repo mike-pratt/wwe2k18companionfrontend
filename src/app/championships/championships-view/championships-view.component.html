@@ -38,7 +38,7 @@
                                 <input type="text" class="form-control" formControlName="champion_id" id="champion_id" readonly>
                                 <div *ngIf="form.controls['champion_id'].hasError('required') && form.controls['champion_id'].touched" class="alert alert-danger">Field is required.</div>
                             </div>
-                            <button class="btn btn-primary" (click)="updateChampion()">Change Champion</button>
+                            <button class="btn btn-primary" (click)="selectNewChampion()">Change Champion</button>
                         </div>
                     </div>
                     <div class="row">
@@ -55,3 +55,4 @@
     </div>
 </div>
 <app-yesnodialogmodal #confirmDeleteDialogModal [title]="'Delete Wrestler'" [message]="'Are you sure you want to delete this championship?'" (confirmPressed)="delete()" (cancelPressed)="confirmDeleteDialogModal.closeModal()"></app-yesnodialogmodal>
+<app-datatable-modal #wrestlersDatatable [title]="'Change Champion'" [data]="wrestlers" [columns]="wrestlersColumns"></app-datatable-modal>

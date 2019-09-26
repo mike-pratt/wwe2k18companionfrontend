@@ -9,6 +9,8 @@ import { WrestlerService } from '../../shared/services/wrestlers/wrestler.servic
 import { Show } from '../../shared/models/shows/show.model';
 import { ChampionshipService } from '../../shared/services/championships/championship.service';
 import { Championship } from '../../shared/models/championships/championship.model';
+import { Paged } from '../../shared/models/paged.model';
+import { DatatableModalComponent } from '../../shared/components/modals/datatable-modal/datatable-modal.component';
 
 @Component({
   selector: 'app-championships-view',
@@ -17,12 +19,22 @@ import { Championship } from '../../shared/models/championships/championship.mod
 })
 export class ChampionshipsViewComponent implements OnInit, IBaseModelViewComponent {
 
-    @ViewChild('confirmDeleteDialogModal', { static: true }) public confirmDeleteDialogModal: YesNoDialogModalComponent;
+    @ViewChild('confirmDeleteDialogModal', { static: true })
+    public confirmDeleteDialogModal: YesNoDialogModalComponent;
+
+    @ViewChild('wrestlersDatatable', { static: true })
+    public wrestlersDatatableModal: DatatableModalComponent;
+
     public form: FormGroup;
     public editButtonPressed: boolean;
     public championship: Championship;
     public champion: Wrestler;
     public shows: Show[];
+    public wrestlers: Paged<Wrestler>;
+
+    public wrestlersColumns = [
+        { name: 'Name', prop: 'name' },
+    ];
 
     private routerSub: Subscription;
 
@@ -46,6 +58,7 @@ export class ChampionshipsViewComponent implements OnInit, IBaseModelViewCompone
                 this.serviceGetById(id).add(() => {
                     this.serviceGetChampionById(this.championship.champion_id);
                     this.serviceGetShowsThatChampionshipBelongsTo(id);
+                    this.serviceGetWrestlers(0);
                 });
             } else {
                 this._router.navigate(['/championships']);
@@ -75,6 +88,10 @@ export class ChampionshipsViewComponent implements OnInit, IBaseModelViewCompone
         this.serviceUpdate(this.championship);
     }
 
+    selectNewChampion(): void {
+        this.wrestlersDatatableModal.open();
+    }
+
     updateChampion(): void {
         this.championship.champion_id = 2; // new id passed from generic components event emitter.
         this.serviceUpdate(this.championship);
@@ -99,6 +116,13 @@ export class ChampionshipsViewComponent implements OnInit, IBaseModelViewCompone
         return this._wrestlerService.getWrestlerById(id).subscribe((data) => {
             this.champion = data;
             this.showData();
+        });
+    }
+
+    private serviceGetWrestlers(pageNumber: number): Subscription {
+        return this._wrestlerService.getWrestlers(pageNumber).subscribe(data => {
+            console.log(data);
+            this.wrestlers = data;
         });
     }
 

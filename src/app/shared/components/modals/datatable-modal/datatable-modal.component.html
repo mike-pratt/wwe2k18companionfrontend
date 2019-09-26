@@ -1,0 +1,18 @@
+<div class="modal fade" bsModal #modal="bs-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{title}}</h4>
+      </div>
+      <div class="modal-body" *ngIf="columns && data">
+        <app-data-table #datatable [columns]="columns" [paginatedData]="data" (onRowClick)="saveSelection()"></app-data-table>
+      </div>
+      <div class="modal-footer">
+        <div class="btn btn-group">
+          <button type="button" class="btn btn-primary" (click)="close()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
