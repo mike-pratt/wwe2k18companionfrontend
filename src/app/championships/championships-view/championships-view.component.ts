@@ -94,7 +94,7 @@ export class ChampionshipsViewComponent implements OnInit, IBaseModelViewCompone
 
     updateChampion(wrestler: Wrestler): void {
         this.championship.champion_id = wrestler.id; // new id passed from generic components event emitter.
-        this.serviceUpdate(this.championship);
+        this.serviceUpdate(this.championship).add(() => this.serviceGetChampionById(wrestler.id));
     }
 
     showData(): void {
@@ -112,7 +112,7 @@ export class ChampionshipsViewComponent implements OnInit, IBaseModelViewCompone
         });
     }
 
-    private serviceGetChampionById(id: number): Subscription {
+    private serviceGetChampionById(id: number): Subscription { // TODO: Could use the paginated get all call instead of get/update champion, instead of making this call.
         return this._wrestlerService.getWrestlerById(id).subscribe((data) => {
             this.champion = data;
             this.showData();
@@ -121,7 +121,6 @@ export class ChampionshipsViewComponent implements OnInit, IBaseModelViewCompone
 
     private serviceGetWrestlers(pageNumber: number): Subscription {
         return this._wrestlerService.getWrestlers(pageNumber).subscribe(data => {
-            console.log(data);
             this.wrestlers = data;
         });
     }
