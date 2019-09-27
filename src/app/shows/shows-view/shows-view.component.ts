@@ -22,9 +22,10 @@ export class ShowsViewComponent implements OnInit, IBaseModelViewComponent {
     public show: Show;
     public championships: Paged<Championship>;
 
-    public championshipsColumns = {
-        name: 'Name', prop: 'name'
-    };
+    public championshipsColumns = [
+        { name: 'Name', prop: 'name' },
+        { name: 'Level', prop: 'level' }
+    ];
 
     private routerSub: Subscription;
 
@@ -40,7 +41,7 @@ export class ShowsViewComponent implements OnInit, IBaseModelViewComponent {
 
     ngOnInit() {
         this.routerSub = this._activatedRoute.params.subscribe((params) => {
-            let showId = params['id'];
+            const showId = params['id'];
             if (showId) {
                 this.serviceGetShow(showId);
                 this.serviceGetChampionships(showId);
@@ -96,7 +97,10 @@ export class ShowsViewComponent implements OnInit, IBaseModelViewComponent {
     }
 
     private serviceGetChampionships(showId: number): Subscription {
-        return this._showService.getChampionshipsForShow(showId).subscribe(data => this.championships = data);
+        return this._showService.getChampionshipsForShow(showId).subscribe((data) => {
+            console.log(data);
+            this.championships = data;
+        });
     }
 
 }
