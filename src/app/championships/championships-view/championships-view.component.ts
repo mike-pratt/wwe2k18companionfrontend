@@ -11,6 +11,7 @@ import { ChampionshipService } from '../../shared/services/championships/champio
 import { Championship } from '../../shared/models/championships/championship.model';
 import { Paged } from '../../shared/models/paged.model';
 import { DatatableModalComponent } from '../../shared/components/modals/datatable-modal/datatable-modal.component';
+import { BaseModel } from '../../shared/models/base.model';
 
 @Component({
   selector: 'app-championships-view',
@@ -29,10 +30,10 @@ export class ChampionshipsViewComponent implements OnInit, IBaseModelViewCompone
     public editButtonPressed: boolean;
     public championship: Championship;
     public champion: Wrestler;
-    public shows: Show[];
+    public shows: Paged<Show>;
     public wrestlers: Paged<Wrestler>;
 
-    public wrestlersColumns = [
+    public wrestlersAndShowsColumns = [
         { name: 'Name', prop: 'name' },
     ];
 
@@ -92,7 +93,7 @@ export class ChampionshipsViewComponent implements OnInit, IBaseModelViewCompone
         this.wrestlersDatatableModal.open();
     }
 
-    updateChampion(wrestler: Wrestler): void {
+    updateChampion(wrestler: BaseModel): void {
         this.championship.champion_id = wrestler.id; // new id passed from generic components event emitter.
         this.serviceUpdate(this.championship).add(() => this.serviceGetChampionById(wrestler.id));
     }
@@ -112,7 +113,8 @@ export class ChampionshipsViewComponent implements OnInit, IBaseModelViewCompone
         });
     }
 
-    private serviceGetChampionById(id: number): Subscription { // TODO: Could use the paginated get all call instead of get/update champion, instead of making this call.
+    // TODO: Could use the paginated get all call instead of get/update champion, instead of making this call.
+    private serviceGetChampionById(id: number): Subscription {
         return this._wrestlerService.getWrestlerById(id).subscribe((data) => {
             this.champion = data;
             this.showData();
@@ -134,7 +136,7 @@ export class ChampionshipsViewComponent implements OnInit, IBaseModelViewCompone
     }
 
     private serviceGetShowsThatChampionshipBelongsTo(id: number): Subscription {
-        return this._championshipService.getShows(id).subscribe((data: Show[]) => {
+        return this._championshipService.getShows(id).subscribe((data: Paged<Show>) => {
             this.shows = data;
         });
     }

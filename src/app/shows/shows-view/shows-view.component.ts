@@ -6,6 +6,8 @@ import { Show } from '../../shared/models/shows/show.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { YesNoDialogModalComponent } from '../../shared/components/yesnodialogmodal/yesnodialogmodal.component';
 import { IBaseModelViewComponent } from '../../shared/models/common/view-component.interface';
+import { Paged } from '../../shared/models/paged.model';
+import { Championship } from '../../shared/models/championships/championship.model';
 
 @Component({
   selector: 'app-shows-view',
@@ -18,6 +20,11 @@ export class ShowsViewComponent implements OnInit, IBaseModelViewComponent {
     public form: FormGroup;
     public editButtonPressed: boolean;
     public show: Show;
+    public championships: Paged<Championship>;
+
+    public championshipsColumns = {
+        name: 'Name', prop: 'name'
+    };
 
     private routerSub: Subscription;
 
@@ -36,6 +43,7 @@ export class ShowsViewComponent implements OnInit, IBaseModelViewComponent {
             let showId = params['id'];
             if (showId) {
                 this.serviceGetShow(showId);
+                this.serviceGetChampionships(showId);
             } else {
                 this._router.navigate(['/shows']);
             }
@@ -85,6 +93,10 @@ export class ShowsViewComponent implements OnInit, IBaseModelViewComponent {
 
     private serviceDeleteShow(id: number): Subscription {
         return this._showService.deleteShow(id).subscribe();
+    }
+
+    private serviceGetChampionships(showId: number): Subscription {
+        return this._showService.getChampionshipsForShow(showId).subscribe(data => this.championships = data);
     }
 
 }

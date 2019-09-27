@@ -30,6 +30,11 @@
                         </div>
                     </div>
                 </form>
+                <div class="row" *ngIf="championships">
+                  <div class="col-md-10">
+                    <app-data-table [columns]="championshipsColumns" [paginatedData]="championships"></app-data-table>
+                  </div>
+                </div>
             </div>
         </div>
     </div>

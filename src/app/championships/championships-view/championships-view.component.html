@@ -44,8 +44,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label for="show_id">Show</label>
-                                <p id="show_id">list of shows - 26/09/19: Championship model needs a nullable show id property, then we can list the show the title belongs to/ update it. Requires API change.</p>
+                                <label>Show</label>
+                                <app-data-table [paginatedData]="shows" [columns]="wrestlersAndShowsColumns"></app-data-table>
                             </div>
                         </div>
                     </div>
@@ -55,4 +55,4 @@
     </div>
 </div>
 <app-yesnodialogmodal #confirmDeleteDialogModal [title]="'Delete Wrestler'" [message]="'Are you sure you want to delete this championship?'" (confirmPressed)="delete()" (cancelPressed)="confirmDeleteDialogModal.closeModal()"></app-yesnodialogmodal>
-<app-datatable-modal #wrestlersDatatable [title]="'Change Champion'" [data]="wrestlers" [columns]="wrestlersColumns" (onRowClick)="updateChampion($event)"></app-datatable-modal>
+<app-datatable-modal #wrestlersDatatable [title]="'Change Champion'" [data]="wrestlers" [columns]="wrestlersAndShowsColumns" (onRowClick)="updateChampion($event)"></app-datatable-modal>

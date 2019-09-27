@@ -4,6 +4,7 @@ import {BaseService} from '../base.service';
 import {Observable} from 'rxjs/Observable';
 import {Paged} from '../../models/paged.model';
 import {Show} from '../../models/shows/show.model';
+import { Championship } from '../../models/championships/championship.model';
 
 @Injectable()
 export class ShowService extends BaseService { // TODO: Rename ShowService :P
@@ -32,6 +33,11 @@ export class ShowService extends BaseService { // TODO: Rename ShowService :P
           .map((data) => {
                 return data.json();
           });
+  }
+
+  public getChampionshipsForShow(id: number): Observable<Paged<Championship>> {
+      return this._http.get(this.actionUrl + '/' + id + '/championships', this.getRequestOptions())
+          .map(data => data.json());
   }
 
   public updateShow(show: Show): Observable<Response> {

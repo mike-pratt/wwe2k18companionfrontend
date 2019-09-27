@@ -28,7 +28,7 @@ export class ChampionshipService extends BaseService  {
         });
   }
 
-  public getShows(championshipId: number): Observable<Show[]> {
+  public getShows(championshipId: number): Observable<Paged<Show>> {
       return this._http.get(this.actionUrl + '/' + championshipId + '/shows', this.getRequestOptions())
           .map((data) => {
               return data.json();
