@@ -1,6 +1,16 @@
 <div class="row">
-    <div class="col-md-8">
-        <p>Draft works!</p>
-        <app-accordion-collapse></app-accordion-collapse>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Draft Mode</h2>
+            </div>
+        </div>
+        <div class="row" *ngIf="shows">
+            <div class="col-md-6">
+                <div *ngFor="let show of shows">
+                    <app-accordion-collapse [title]="show.name" [data]="showRosters[show.id]" [columns]="tableCols"></app-accordion-collapse>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
