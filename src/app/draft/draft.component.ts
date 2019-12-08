@@ -15,6 +15,7 @@ export class DraftComponent implements OnInit {
 
     private shows: Show[];
     private showRosters: IDictionary<Paged<Wrestler>> = {};
+    private selectedWrestlersForDraft: IDictionary<Wrestler[]> = {}; // Key is show id, TODO: What if a wrestler has no assigned show?
 
     private tableCols: any = [
         { title: 'Name', prop: 'name' },
@@ -24,12 +25,20 @@ export class DraftComponent implements OnInit {
     constructor(private _showService: ShowService) {
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.serviceGetShows().add(() => {
             for (let show of this.shows) {
                 this.serviceGetShowRoster(show.id, 1);
             }
         });
+    }
+
+    public onWrestersSelected(wrestlers: Wrestler[]) {
+        if (wrestlers.length > 0) {
+            const id = wrestlers[0].show_id; // All wrestlers in the array should belong to the same show at this point.
+            this.selectedWrestlersForDraft[id] = wrestlers;
+        }
+        console.log('Selected wrestlers for draft = ', this.selectedWrestlersForDraft);
     }
 
     private serviceGetShows(): Subscription {

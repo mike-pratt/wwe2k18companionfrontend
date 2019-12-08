@@ -35,7 +35,7 @@
                     [limit]="paginatedData.per_page"
                     (page)="goToPage($event)"
                     [selected]="multiSelectedItems"
-                    (select)="goToView($event)"
+                    (select)="onMultiSelected($event)"
             >
             </ngx-datatable>
         </div>

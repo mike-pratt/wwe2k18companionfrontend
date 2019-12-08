@@ -25,6 +25,9 @@ export class DatatableComponent implements OnInit {
     @Output('onRowClick')
     public onRowClick: EventEmitter<BaseModel> = new EventEmitter<BaseModel>();
 
+    @Output('onMultiSelect')
+    public onMultiSelect: EventEmitter<BaseModel[]> = new EventEmitter<BaseModel[]>();
+
     public pageOffset = 0;
 
     private multiSelectedItems: BaseModel[] = [];
@@ -39,5 +42,9 @@ export class DatatableComponent implements OnInit {
     public goToView(event: any): void {
         const model = event.selected[0];
         this.onRowClick.emit(model);
+    }
+
+    public onMultiSelected(event: any) {
+        this.onMultiSelect.emit(this.multiSelectedItems);
     }
 }

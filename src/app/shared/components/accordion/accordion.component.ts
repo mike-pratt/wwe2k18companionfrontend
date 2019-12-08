@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { BaseModel } from '../../models/base.model';
 import { Paged } from '../../models/paged.model';
 
@@ -16,6 +16,13 @@ export class AccordionCollapseComponent {
 
     @Input('columns')
     public columns: any;
+
+    @Output('onMultiSelect')
+    public onMultiSelect: EventEmitter<BaseModel[]> = new EventEmitter<BaseModel[]>();
     
     private isCollapsed: boolean = true;
+
+    public onMultiSelected(models: BaseModel[]) {
+        this.onMultiSelect.emit(models);
+    }
 }

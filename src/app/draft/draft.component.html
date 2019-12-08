@@ -6,9 +6,9 @@
             </div>
         </div>
         <div class="row" *ngIf="shows">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div *ngFor="let show of shows">
-                    <app-accordion-collapse [title]="show.name" [data]="showRosters[show.id]" [columns]="tableCols"></app-accordion-collapse>
+                    <app-accordion-collapse [title]="show.name" [data]="showRosters[show.id]" [columns]="tableCols" (onMultiSelect)="onWrestersSelected($event)"></app-accordion-collapse>
                 </div>
             </div>
         </div>
