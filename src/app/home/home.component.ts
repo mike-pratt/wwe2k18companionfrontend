@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
             this.router.navigate(['/championships']);
             break;
         case 3: // Draft Mode
-            // this.router.navigate(['/draft']); // TODO
+            this.router.navigate(['/draft']);
             break;
         default:
           break;

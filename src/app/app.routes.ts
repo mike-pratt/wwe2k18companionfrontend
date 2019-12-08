@@ -11,6 +11,7 @@ import { ChampionshipsViewComponent } from './championships/championships-view/c
 import { WrestlersComponent } from './wrestlers/wrestlers.component';
 import { ShowsComponent } from './shows/shows.component';
 import { ChampionshipsComponent } from './championships/championships.component';
+import { DraftComponent } from './draft/draft.component';
 
 
 export const ROUTES: Routes = [
@@ -47,6 +48,7 @@ export const ROUTES: Routes = [
             { path: 'view/:id', component: ChampionshipsViewComponent }
         ]
     },
+    { path: 'draft', component: DraftComponent, canActivate: [AuthGuard] }
 
     // { path: 'auth/logout', component: LogoutComponent, canActivate: [AuthGuard] },
     // { path: 'auth/changepassword', component: AuthChangePasswordComponent, canActivate: [AuthGuard] }, // Temp, remove

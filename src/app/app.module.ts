@@ -32,6 +32,7 @@ import { ChampionshipsComponent } from './championships/championships.component'
 import { ChampionshipsCreateComponent } from './championships/modals/championships-create/championships-create.component';
 import { ChampionshipService } from './shared/services/championships/championship.service';
 import { WrestlerRivalsResolverService } from './shared/services/wrestlers/wrestler-rivals-resolver.service';
+import { DraftComponent } from './draft/draft.component';
 
     @NgModule({
     declarations: [
@@ -51,6 +52,7 @@ import { WrestlerRivalsResolverService } from './shared/services/wrestlers/wrest
         ShowsCreateComponent,
         WrestlersComponent,
         WrestlersCreateComponent,
+        DraftComponent
     ],
         imports: [
             BrowserModule,
