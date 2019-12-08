@@ -16,6 +16,9 @@ export class DatatableComponent implements OnInit {
     @Input('columns')
     public columns: any;
 
+    @Input('allowMultiSelect')
+    public allowMultiSelect: boolean;
+
     @Output('onPageChange')
     public onPageChange: EventEmitter<number> = new EventEmitter<number>();
 
@@ -23,6 +26,8 @@ export class DatatableComponent implements OnInit {
     public onRowClick: EventEmitter<BaseModel> = new EventEmitter<BaseModel>();
 
     public pageOffset = 0;
+
+    private multiSelectedItems: BaseModel[] = [];
 
     public ngOnInit(): void {
     }

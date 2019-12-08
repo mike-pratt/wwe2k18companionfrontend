@@ -1,19 +1,43 @@
-<div class="col-md-12" *ngIf="paginatedData && columns">
-  <ngx-datatable
-          class="bootstrap"
-          [selectionType]="'single'"
-          [rows]="paginatedData.data"
-          [columns]="columns"
-          [count]="paginatedData.total"
-          [columnMode]="'force'"
-          [headerHeight]="'auto'"
-          [footerHeight]="'auto'"
-          [rowHeight]="'auto'"
-          [externalPaging]="true"
-          [offset]="pageOffset"
-          [limit]="paginatedData.per_page"
-          (page)="goToPage($event)"
-          (select)="goToView($event)"
-  >
-  </ngx-datatable>
+<div class="row" *ngIf="paginatedData && columns">
+    <div class="col-md-12" *ngIf="!allowMultiSelect; else multiSelectTable">
+        <ngx-datatable
+                class="bootstrap"
+                [selectionType]="'single'"
+                [rows]="paginatedData.data"
+                [columns]="columns"
+                [count]="paginatedData.total"
+                [columnMode]="'force'"
+                [headerHeight]="'auto'"
+                [footerHeight]="'auto'"
+                [rowHeight]="'auto'"
+                [externalPaging]="true"
+                [offset]="pageOffset"
+                [limit]="paginatedData.per_page"
+                (page)="goToPage($event)"
+                (select)="goToView($event)"
+        >
+        </ngx-datatable>
+      </div>
+      <ng-template #multiSelectTable>
+        <div class="col-md-12">
+            <ngx-datatable
+                    class="bootstrap"
+                    [selectionType]="'multiClick'"
+                    [rows]="paginatedData.data"
+                    [columns]="columns"
+                    [count]="paginatedData.total"
+                    [columnMode]="'force'"
+                    [headerHeight]="'auto'"
+                    [footerHeight]="'auto'"
+                    [rowHeight]="'auto'"
+                    [externalPaging]="true"
+                    [offset]="pageOffset"
+                    [limit]="paginatedData.per_page"
+                    (page)="goToPage($event)"
+                    [selected]="multiSelectedItems"
+                    (select)="goToView($event)"
+            >
+            </ngx-datatable>
+        </div>
+      </ng-template>
 </div>
