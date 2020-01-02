@@ -1,4 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+    --c-red: #d7182a;
+    --c-black: #302D2C;
+    --c-white: #fff;
+}
+
+
 .ngx-datatable.bootstrap {
     box-shadow: none;
     font-size: 13px;
@@ -30,12 +38,12 @@
     vertical-align: top;
 }
 .ngx-datatable.bootstrap .datatable-body .datatable-body-row.active {
-    background-color: #66605F; /* Datatable hover colour. */
+    background-color: var(--c-black); /* Datatable hover colour. */
     color: #FFF;
 }
 
 .ngx-datatable.bootstrap .datatable-body .datatable-body-row:hover {
-    background-color: #66605F; /* Datatable hover colour. */
+    background-color: var(--c-black); /* Datatable hover colour. */
     color: #FFF;
     cursor: pointer;
 }
@@ -58,7 +66,7 @@
 }
 .ngx-datatable.bootstrap .datatable-footer .datatable-pager ul li:not(.disabled).active a,
 .ngx-datatable.bootstrap .datatable-footer .datatable-pager ul li:not(.disabled):hover a {
-    background-color: #545454;
+    background-color: var(--c-black);
     font-weight: bold;
 }
 .ngx-datatable.bootstrap .datatable-footer .datatable-pager a {
@@ -88,7 +96,7 @@
 }
 
 .grey-background {
-    background-color: #66605F;
+    background-color: var(--c-black);
 }
 
 .off-white-background {

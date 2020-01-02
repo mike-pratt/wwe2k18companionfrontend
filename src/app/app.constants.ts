@@ -13,7 +13,7 @@ export let CONFIGURATION = {
     isDev: true, // Change this to false to run prod API.
     authCacheTime: 60000, // How long the JWT auth token should be cached for.
     authTokenName: 'AUTH_TOKEN',
-    siteName: 'WWE 2k18 Companion',
+    siteName: 'WWE 2k Companion',
     siteDefaultLanguage: 'en', // English
     appVersion: '0.0.0'
 };
