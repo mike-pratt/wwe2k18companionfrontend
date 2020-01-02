@@ -5,12 +5,17 @@
                 <h2>Draft Mode</h2>
             </div>
         </div>
-        <div class="row" *ngIf="shows">
+        <div class="row" *ngIf="shows && showRosters">
             <div class="col-md-12">
                 <div *ngFor="let show of shows">
                     <app-accordion-collapse [title]="show.name" [data]="showRosters[show.id]" [columns]="tableCols" (onMultiSelect)="onWrestersSelected($event)"></app-accordion-collapse>
                 </div>
             </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <button type="button" class="btn btn-primary" (click)="generateDraft()" [disabled]="!showRosters">Generate Draft</button>
+          </div>
         </div>
     </div>
 </div>

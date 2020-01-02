@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Wrestler } from '../shared/models/wrestlers/wrestler.model';
 import { IDictionary } from '../shared/models/common/dictionary.interface';
 import { Paged } from '../shared/models/paged.model';
+import { WrestlerService } from '../shared/services/wrestlers/wrestler.service';
 
 @Component({
     selector: 'app-draft-mode',
@@ -19,15 +20,20 @@ export class DraftComponent implements OnInit {
 
     private tableCols: any = [
         { title: 'Name', prop: 'name' },
-        {title: 'Show', prop: 'show_id' }
+        { title: 'Show', prop: 'show_id' }
     ];
 
-    constructor(private _showService: ShowService) {
+    constructor(private _showService: ShowService,
+                private _wrestlerService: WrestlerService) {
     }
 
     public ngOnInit(): void {
+        this.getShows();
+    }
+
+    public getShows() {
         this.serviceGetShows().add(() => {
-            for (let show of this.shows) {
+            for (const show of this.shows) {
                 this.serviceGetShowRoster(show.id, 1);
             }
         });
@@ -38,15 +44,36 @@ export class DraftComponent implements OnInit {
             const id = wrestlers[0].show_id; // All wrestlers in the array should belong to the same show at this point.
             this.selectedWrestlersForDraft[id] = wrestlers;
         }
-        console.log('Selected wrestlers for draft = ', this.selectedWrestlersForDraft);
+    }
+
+    public generateDraft() {
+        console.log('selected ', this.selectedWrestlersForDraft);
+        const showIds = Object.keys(this.selectedWrestlersForDraft);
+        const wrestlers2D = Object.values(this.selectedWrestlersForDraft);
+        const wrestlers: Wrestler[] = [].concat(...wrestlers2D);
+
+        for (let i = 0; i < wrestlers.length; i++) {
+            const wrestler: Wrestler = wrestlers[i];
+            const randomShowId: number = parseInt(showIds[Math.floor(Math.random() * showIds.length)]);
+            wrestler.show_id = randomShowId;
+            this.serviceUpdateWrestler(wrestler);
+        }
+        this.selectedWrestlersForDraft = {};
+        this.shows = null;
+        this.showRosters = {}; // Reset shows and reload them to get updated data.
+        this.getShows();
     }
 
     private serviceGetShows(): Subscription {
        return this._showService.getAllShows().subscribe((data: Show[]) => this.shows = data);
     }
 
-    private serviceGetShowRoster(showId: number, pageNumber: 1): Subscription { 
+    private serviceGetShowRoster(showId: number, pageNumber: 1): Subscription {
         return this._showService.getRoster(showId, pageNumber).subscribe((data: Paged<Wrestler>) => this.showRosters[showId] = data);
+    }
+
+    private serviceUpdateWrestler(wrestler: Wrestler): Subscription {
+        return this._wrestlerService.updateWrestler(wrestler).subscribe();
     }
 
 }
